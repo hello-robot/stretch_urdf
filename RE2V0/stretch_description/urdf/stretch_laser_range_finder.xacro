@@ -23,7 +23,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://stretch_description/meshes/laser.STL" />
+          filename="./meshes/laser.STL" />
       </geometry>
       <material
         name="">
@@ -37,7 +37,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://stretch_description/meshes/laser.STL" />
+          filename="./meshes/laser_collision.STL" />
       </geometry>
     </collision>
   </link>

@@ -25,7 +25,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://stretch_description/meshes/link_gripper.STL" />
+          filename="./meshes/link_gripper.STL" />
       </geometry>
       <material
         name="">
@@ -39,7 +39,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://stretch_description/meshes/link_gripper.STL" />
+          filename="./meshes/link_gripper_collision.STL" />
       </geometry>
     </collision>
   </link>
@@ -82,7 +82,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://stretch_description/meshes/link_puller.STL" />
+          filename="./meshes/link_puller.STL" />
       </geometry>
       <material
         name="">
@@ -96,7 +96,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://stretch_description/meshes/link_puller.STL" />
+          filename="./meshes/link_puller.STL" />
       </geometry>
     </collision>
   </link>
@@ -136,7 +136,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://stretch_description/meshes/link_gripper_finger_left.STL" scale="${scale_finger_length} 1.0 1.0"/>
+          filename="./meshes/link_gripper_finger_left.STL" scale="${scale_finger_length} 1.0 1.0"/>
       </geometry>
       <material
         name="">
@@ -150,7 +150,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://stretch_description/meshes/link_gripper_finger_left.STL" scale="${scale_finger_length} 1.0 1.0"/>
+          filename="./meshes/link_gripper_finger_left_collision.STL" scale="${scale_finger_length} 1.0 1.0"/>
       </geometry>
     </collision>
   </link>
@@ -192,7 +192,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://stretch_description/meshes/link_gripper_fingertip_left.STL" />
+          filename="./meshes/link_gripper_fingertip_left.STL" />
       </geometry>
       <material
         name="">
@@ -206,7 +206,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://stretch_description/meshes/link_gripper_fingertip_left.STL" />
+          filename="./meshes/link_gripper_fingertip_left_collision.STL" />
       </geometry>
     </collision>
   </link>
@@ -247,7 +247,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://stretch_description/meshes/link_gripper_finger_right.STL" scale="${scale_finger_length} 1.0 1.0"/>
+          filename="./meshes/link_gripper_finger_right.STL" scale="${scale_finger_length} 1.0 1.0"/>
       </geometry>
       <material
         name="">
@@ -261,7 +261,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://stretch_description/meshes/link_gripper_finger_right.STL" scale="${scale_finger_length} 1.0 1.0"/>
+          filename="./meshes/link_gripper_finger_right_collision.STL" scale="${scale_finger_length} 1.0 1.0"/>
       </geometry>
     </collision>
   </link>
@@ -303,7 +303,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://stretch_description/meshes/link_gripper_fingertip_right.STL" />
+          filename="./meshes/link_gripper_fingertip_right.STL" />
       </geometry>
       <material
         name="">
@@ -317,7 +317,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://stretch_description/meshes/link_gripper_fingertip_right.STL" />
+          filename="./meshes/link_gripper_fingertip_right_collision.STL" />
       </geometry>
     </collision>
   </link>

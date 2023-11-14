@@ -28,7 +28,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://stretch_description/meshes/base_link.STL" />
+          filename="./meshes/base_link.STL" />
       </geometry>
       <material
         name="">
@@ -42,7 +42,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://stretch_description/meshes/base_link.STL" />
+          filename="./meshes/base_link_collision.STL" />
       </geometry>
     </collision>
   </link>
@@ -69,7 +69,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://stretch_description/meshes/link_right_wheel.STL" />
+          filename="./meshes/link_right_wheel.STL" />
       </geometry>
       <material
         name="">
@@ -83,7 +83,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://stretch_description/meshes/link_right_wheel.STL" />
+          filename="./meshes/link_right_wheel_collision.STL" />
       </geometry>
     </collision>
   </link>
@@ -125,7 +125,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://stretch_description/meshes/link_left_wheel.STL" />
+          filename="./meshes/link_left_wheel.STL" />
       </geometry>
       <material
         name="">
@@ -139,7 +139,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://stretch_description/meshes/link_left_wheel.STL" />
+          filename="./meshes/link_left_wheel_collision.STL" />
       </geometry>
     </collision>
   </link>
@@ -182,7 +182,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://stretch_description/meshes/omni_wheel_m.STL" />
+          filename="./meshes/omni_wheel_m.STL" />
       </geometry>
       <material
         name="">
@@ -232,7 +232,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://stretch_description/meshes/link_mast.STL" />
+          filename="./meshes/link_mast.STL" />
       </geometry>
       <material
         name="">
@@ -246,7 +246,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://stretch_description/meshes/link_mast.STL" />
+          filename="./meshes/link_mast_collision.STL" />
       </geometry>
     </collision>
   </link>
@@ -287,7 +287,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://stretch_description/meshes/link_lift.STL" />
+          filename="./meshes/link_lift.STL" />
       </geometry>
       <material
         name="">
@@ -301,7 +301,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://stretch_description/meshes/link_lift.STL" />
+          filename="./meshes/link_lift_collision.STL" />
       </geometry>
     </collision>
   </link>
@@ -346,7 +346,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://stretch_description/meshes/link_arm_l4.STL" />
+          filename="./meshes/link_arm_l4.STL" />
       </geometry>
       <material
         name="">
@@ -360,7 +360,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://stretch_description/meshes/link_arm_l4.STL" />
+          filename="./meshes/link_arm_l4_collision.STL" />
       </geometry>
     </collision>
   </link>
@@ -401,7 +401,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://stretch_description/meshes/link_arm_l3.STL" />
+          filename="./meshes/link_arm_l3.STL" />
       </geometry>
       <material
         name="">
@@ -415,7 +415,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://stretch_description/meshes/link_arm_l3.STL" />
+          filename="./meshes/link_arm_l3_collision.STL" />
       </geometry>
     </collision>
   </link>
@@ -458,7 +458,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://stretch_description/meshes/link_arm_l2.STL" />
+          filename="./meshes/link_arm_l2.STL" />
       </geometry>
       <material
         name="">
@@ -472,7 +472,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://stretch_description/meshes/link_arm_l2.STL" />
+          filename="./meshes/link_arm_l2_collision.STL" />
       </geometry>
     </collision>
   </link>
@@ -515,7 +515,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://stretch_description/meshes/link_arm_l1.STL" />
+          filename="./meshes/link_arm_l1.STL" />
       </geometry>
       <material
         name="">
@@ -529,7 +529,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://stretch_description/meshes/link_arm_l1.STL" />
+          filename="./meshes/link_arm_l1_collision.STL" />
       </geometry>
     </collision>
   </link>
@@ -572,7 +572,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://stretch_description/meshes/link_arm_l0.STL" />
+          filename="./meshes/link_arm_l0.STL" />
       </geometry>
       <material
         name="">
@@ -586,7 +586,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://stretch_description/meshes/link_arm_l0.STL" />
+          filename="./meshes/link_arm_l0_collision.STL" />
       </geometry>
     </collision>
   </link>
@@ -629,7 +629,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://stretch_description/meshes/link_wrist_yaw.STL" />
+          filename="./meshes/link_wrist_yaw.STL" />
       </geometry>
       <material
         name="">
@@ -643,7 +643,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://stretch_description/meshes/link_wrist_yaw.STL" />
+          filename="./meshes/link_wrist_yaw_collision.STL" />
       </geometry>
     </collision>
   </link>
@@ -691,7 +691,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://stretch_description/meshes/link_head.STL" />
+          filename="./meshes/link_head.STL" />
       </geometry>
       <material
         name="">
@@ -705,7 +705,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://stretch_description/meshes/link_head.STL" />
+          filename="./meshes/link_head_collision.STL" />
       </geometry>
     </collision>
   </link>
@@ -746,7 +746,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://stretch_description/meshes/link_head_pan.STL" />
+          filename="./meshes/link_head_pan.STL" />
       </geometry>
       <material
         name="">
@@ -760,7 +760,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://stretch_description/meshes/link_head_pan.STL" />
+          filename="./meshes/link_head_pan_collision.STL" />
       </geometry>
     </collision>
   </link>
@@ -803,7 +803,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://stretch_description/meshes/link_head_tilt.STL" />
+          filename="./meshes/link_head_tilt.STL" />
       </geometry>
       <material
         name="">
@@ -817,7 +817,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://stretch_description/meshes/link_head_tilt.STL" />
+          filename="./meshes/link_head_tilt_collision.STL" />
       </geometry>
     </collision>
   </link>
