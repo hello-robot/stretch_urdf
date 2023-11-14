@@ -21,15 +21,27 @@ def main():
     #print("ros2 run xacro xacro `ros2 pkg prefix stretch_description`/urdf/stretch_description.xacro > `ros2 pkg prefix stretch_description`/urdf/stretch_uncalibrated.urdf")
 
     descriptions=['./urdf/stretch_description_RE2V0_tool_none.xacro']
+    urdfs=[]
     for d in descriptions:
         bashCommand = "ros2 run xacro xacro {}".format(d)
         print(bashCommand)
         process = run_cmd(bashCommand)
         urdf = process.stdout
         urdf_filepath = d[:-6]+'.urdf'
+        urdfs.append(urdf_filepath)
         with open(urdf_filepath, "w") as open_file:
             print(urdf, file=open_file)
             open_file.close()
+
+    old_name = "package://stretch_description/"
+    new_name = "./"
+    for u in urdfs:
+        bashCommand='rpl -q --encoding UTF-8 %s %s %s'%(old_name,new_name,u)
+        print(bashCommand)
+        process = run_cmd(bashCommand)
+
+    #Now change path names
+
     # bashCommand = "ros2 pkg prefix stretch_description"
     # process = run_cmd(bashCommand)
     # installpath = process.stdout

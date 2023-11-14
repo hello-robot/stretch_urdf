@@ -23,7 +23,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://stretch_description/meshes/base_imu.STL" />
+          filename="./meshes/base_imu.STL" />
       </geometry>
       <material
         name="">
@@ -37,7 +37,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://stretch_description/meshes/base_imu.STL" />
+          filename="./meshes/base_imu.STL" />
       </geometry>
     </collision>
   </link>

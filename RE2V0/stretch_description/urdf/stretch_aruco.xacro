@@ -23,7 +23,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://stretch_description/meshes/link_aruco_right_base.STL" />
+          filename="./meshes/link_aruco_right_base.STL" />
       </geometry>
       <material
         name="">
@@ -37,7 +37,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://stretch_description/meshes/link_aruco_right_base.STL" />
+          filename="./meshes/link_aruco_right_base.STL" />
       </geometry>
     </collision>
   </link>
@@ -79,7 +79,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://stretch_description/meshes/link_aruco_left_base.STL" />
+          filename="./meshes/link_aruco_left_base.STL" />
       </geometry>
       <material
         name="">
@@ -93,7 +93,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://stretch_description/meshes/link_aruco_left_base.STL" />
+          filename="./meshes/link_aruco_left_base.STL" />
       </geometry>
     </collision>
   </link>
@@ -134,7 +134,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://stretch_description/meshes/link_aruco_shoulder.STL" />
+          filename="./meshes/link_aruco_shoulder.STL" />
       </geometry>
       <material
         name="">
@@ -148,7 +148,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://stretch_description/meshes/link_aruco_shoulder.STL" />
+          filename="./meshes/link_aruco_shoulder.STL" />
       </geometry>
     </collision>
   </link>
@@ -189,7 +189,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://stretch_description/meshes/link_aruco_top_wrist.STL" />
+          filename="./meshes/link_aruco_top_wrist.STL" />
       </geometry>
       <material
         name="">
@@ -203,7 +203,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://stretch_description/meshes/link_aruco_top_wrist.STL" />
+          filename="./meshes/link_aruco_top_wrist.STL" />
       </geometry>
     </collision>
   </link>
@@ -244,7 +244,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://stretch_description/meshes/link_aruco_inner_wrist.STL" />
+          filename="./meshes/link_aruco_inner_wrist.STL" />
       </geometry>
       <material
         name="">
@@ -258,7 +258,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://stretch_description/meshes/link_aruco_inner_wrist.STL" />
+          filename="./meshes/link_aruco_inner_wrist.STL" />
       </geometry>
     </collision>
   </link>
