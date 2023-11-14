@@ -20,9 +20,10 @@ def main():
 
     #print("ros2 run xacro xacro `ros2 pkg prefix stretch_description`/urdf/stretch_description.xacro > `ros2 pkg prefix stretch_description`/urdf/stretch_uncalibrated.urdf")
 
-    descriptions=['./stretch_re2/urdf/stretch_description_RE2V0_tool_none.xacro']
+    descriptions=['./urdf/stretch_description_RE2V0_tool_none.xacro']
     for d in descriptions:
         bashCommand = "ros2 run xacro xacro {}".format(d)
+        print(bashCommand)
         process = run_cmd(bashCommand)
         urdf = process.stdout
         urdf_filepath = d[:-6]+'.urdf'
