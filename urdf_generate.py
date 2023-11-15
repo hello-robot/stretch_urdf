@@ -5,6 +5,7 @@ import sys
 import os
 from ament_index_python.packages import get_package_share_directory
 
+#Factory tool to generate URDFs from Xacros
 
 def run_cmd(cmdstr):
     process = subprocess.run(shlex.split(cmdstr), capture_output=True, text=True)
