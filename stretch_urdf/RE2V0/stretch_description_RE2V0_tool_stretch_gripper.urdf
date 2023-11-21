@@ -26,6 +26,28 @@
       </geometry>
     </collision>
   </link>
+  <link name="link_ground">
+    <inertial>
+      <origin rpy="0 0 0" xyz="5.55111512312578E-17 3.12250225675825E-17 -0.05"/>
+      <mass value="100"/>
+      <inertia ixx="8.41666666666667" ixy="-7.74916461211739E-16" ixz="-4.48957242105862E-16" iyy="8.41666666666667" iyz="-4.0797041547857E-15" izz="16.6666666666667"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="./meshes/link_ground_collision.STL"/>
+      </geometry>
+      <material name="">
+        <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="./meshes/link_ground_collision.STL"/>
+      </geometry>
+    </collision>
+  </link>
   <link name="link_right_wheel">
     <inertial>
       <origin rpy="0 0 0" xyz="0 0 0.02765"/>
