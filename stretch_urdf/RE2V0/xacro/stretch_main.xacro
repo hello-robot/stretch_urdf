@@ -87,6 +87,19 @@
       </geometry>
     </collision>
   </link>
+  <joint
+    name="joint_ground"
+    type="fixed">
+    <origin
+      xyz="-0.1 -0.3185 0"
+      rpy="0 0 -1.5708" />
+    <parent
+      link="base_link" />
+    <child
+      link="link_ground" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
   <link
     name="link_right_wheel">
     <inertial>
