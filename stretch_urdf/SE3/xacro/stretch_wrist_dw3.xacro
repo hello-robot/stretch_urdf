@@ -1,49 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
-     Commit Version: 1.5.1-0-g916b5db  Build Version: 1.5.7152.31018
-     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
-<robot
-  name="stretch_description_SE3_DW3.SLDASM">
-  <link
-    name="link_wrist_yaw">
-    <inertial>
-      <origin
-        xyz="2.20130857986334E-11 2.93171678765192E-05 -0.0189665926447277"
-        rpy="0 0 0" />
-      <mass
-        value="0.0404746907425004" />
-      <inertia
-        ixx="6.57801136682346E-06"
-        ixy="7.84074128131277E-16"
-        ixz="-1.98867435458377E-14"
-        iyy="6.58204899910504E-06"
-        iyz="-5.83819552651482E-09"
-        izz="3.85021258520436E-06" />
-    </inertial>
-    <visual>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="package://stretch_description_SE3_DW3.SLDASM/meshes/link_wrist_yaw.STL" />
-      </geometry>
-      <material
-        name="">
-        <color
-          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
-      </material>
-    </visual>
-    <collision>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="package://stretch_description_SE3_DW3.SLDASM/meshes/link_wrist_yaw.STL" />
-      </geometry>
-    </collision>
-  </link>
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="stretch_wrist_dw3">
+
   <link
     name="link_wrist_yaw_bottom">
     <inertial>
@@ -66,7 +23,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://stretch_description_SE3_DW3.SLDASM/meshes/link_wrist_yaw_bottom.STL" />
+          filename="./meshes/link_wrist_yaw_bottom.STL" />
       </geometry>
       <material
         name="">
@@ -80,7 +37,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://stretch_description_SE3_DW3.SLDASM/meshes/link_wrist_yaw_bottom.STL" />
+          filename="./meshes/link_wrist_yaw_bottom_collision.STL" />
       </geometry>
     </collision>
   </link>
@@ -119,7 +76,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://stretch_description_SE3_DW3.SLDASM/meshes/link_wrist_pitch.STL" />
+          filename="./meshes/link_wrist_pitch.STL" />
       </geometry>
       <material
         name="">
@@ -133,7 +90,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://stretch_description_SE3_DW3.SLDASM/meshes/link_wrist_pitch.STL" />
+          filename="./meshes/link_wrist_pitch_collision.STL" />
       </geometry>
     </collision>
   </link>
@@ -149,11 +106,7 @@
       link="link_wrist_pitch" />
     <axis
       xyz="0 0 1" />
-    <limit
-      lower="0"
-      upper="0"
-      effort="0"
-      velocity="0" />
+    <limit effort="100" lower="-1.57" upper="0.56" velocity="1.0"/>
   </joint>
   <link
     name="link_wrist_roll">
@@ -177,7 +130,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://stretch_description_SE3_DW3.SLDASM/meshes/link_wrist_roll.STL" />
+          filename="./meshes/link_wrist_roll.STL" />
       </geometry>
       <material
         name="">
@@ -191,7 +144,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://stretch_description_SE3_DW3.SLDASM/meshes/link_wrist_roll.STL" />
+          filename="./meshes/link_wrist_roll_collision.STL" />
       </geometry>
     </collision>
   </link>
@@ -207,10 +160,8 @@
       link="link_wrist_roll" />
     <axis
       xyz="0 0 -1" />
-    <limit
-      lower="0"
-      upper="0"
-      effort="0"
-      velocity="0" />
+    <limit effort="100" lower="-3.14" upper="3.14" velocity="1.0"/>
   </joint>
+
+
 </robot>
