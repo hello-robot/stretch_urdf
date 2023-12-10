@@ -47,6 +47,11 @@ def main():
                   'stretch_description_RE2V0_tool_dex_wrist']
     generate_from_descriptions(root_dir, xacro_dir, descriptions)
 
+    root_dir='./stretch_urdf/SE3/'
+    xacro_dir=root_dir+'xacro/'
+    descriptions=['stretch_description_SE3_eoa_wrist_dw3_tool_nil',
+                  'stretch_description_SE3_eoa_wrist_dw3_tool_sg3']
+    generate_from_descriptions(root_dir, xacro_dir, descriptions)
 
 if __name__ == '__main__':
      main()
