@@ -843,7 +843,7 @@
     </collision>
   </link>
   <joint name="joint_wrist_yaw_bottom" type="fixed">
-    <origin rpy="3.14159265358979 0 1.5707963267949" xyz="0 0 0"/>
+    <origin rpy="-3.14159265358979 0 -1.5707963267949" xyz="0 0 0"/>
     <parent link="link_wrist_yaw"/>
     <child link="link_wrist_yaw_bottom"/>
     <axis xyz="0 0 0"/>
@@ -874,7 +874,7 @@
     <origin rpy="1.5707963267949 0 0" xyz="0 0.0194549999999678 -0.0304999999999953"/>
     <parent link="link_wrist_yaw_bottom"/>
     <child link="link_wrist_pitch"/>
-    <axis xyz="0 0 1"/>
+    <axis xyz="0 0 -1"/>
     <limit effort="100" lower="-1.57" upper="0.56" velocity="1.0"/>
   </joint>
   <link name="link_wrist_roll">
@@ -903,7 +903,7 @@
     <origin rpy="3.14159265358979 1.5707963267949 0" xyz="-0.0188587444077927 -0.0240000000000002 0.0195500000000002"/>
     <parent link="link_wrist_pitch"/>
     <child link="link_wrist_roll"/>
-    <axis xyz="0 0 -1"/>
+    <axis xyz="0 0 1"/>
     <limit effort="100" lower="-3.14" upper="3.14" velocity="1.0"/>
   </joint>
   <link name="link_gripper_s3_body">

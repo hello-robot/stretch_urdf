@@ -72,10 +72,68 @@ class URDFVisualizer:
 
 
 
+class StretchState:
+
+    def __init__(self, robot, use_gripper,use_dw):
+        self.stretch = robot
+        self.use_gripper=use_gripper
+        self.use_dw=use_dw
+        self.gripper_conversion = GripperConversion()
+
+    def get_urdf_configuration(self):
+
+        stretch_status = self.stretch.get_status()
+        # set positions of the telescoping joints
+        arm_status = stretch_status['arm']
+        arm_m = arm_status['pos']
+        telescoping_link_m = arm_m / 4.0
+
+        lift_status = stretch_status['lift']
+        lift_m = lift_status['pos']
+
+        wrist_yaw_status = stretch_status['end_of_arm']['wrist_yaw']
+        wrist_yaw_rad = wrist_yaw_status['pos']
+
+        head_pan_status = stretch_status['head']['head_pan']
+        head_pan_rad = head_pan_status['pos']
+
+        head_tilt_status = stretch_status['head']['head_tilt']
+        head_tilt_rad = head_tilt_status['pos']
+
+        configuration = {
+            'joint_left_wheel': 0.0,
+            'joint_right_wheel': 0.0,
+            'joint_lift': lift_m,
+            'joint_arm_l0': telescoping_link_m,
+            'joint_arm_l1': telescoping_link_m,
+            'joint_arm_l2': telescoping_link_m,
+            'joint_arm_l3': telescoping_link_m,
+            'joint_wrist_yaw': wrist_yaw_rad,
+            'joint_head_pan': head_pan_rad,
+            'joint_head_tilt': head_tilt_rad
+        }
+
+        if self.use_gripper:
+            try:
+                gripper_status = stretch_status['end_of_arm']['stretch_gripper']
+            except KeyError:
+                print('Tool must include Stretch Gripper. Exiting...')
+                exit(1)
+            _, gripper_finger_rad, _, _ = self.gripper_conversion.status_to_all(gripper_status)
+            configuration['joint_gripper_finger_left']= gripper_finger_rad
+            configuration['joint_gripper_finger_right']=gripper_finger_rad
+        if self.use_dw:
+            configuration['joint_wrist_pitch'] = stretch_status['end_of_arm']['wrist_pitch']['pos']
+            configuration['joint_wrist_roll'] = stretch_status['end_of_arm']['wrist_roll']['pos']
+
+        return configuration
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Python based URDF visualization')
     parser.add_argument('-t', "--trajectory", help="Visualize predefined trajectory", action="store_true")
     parser.add_argument('-c', "--collision", help="Use collision meshes", action="store_true")
+    parser.add_argument('-g', "--gamepad", help="Use gamepad to control pose", action="store_true")
     args = parser.parse_args()
 
     pkg = str(importlib_resources.files("stretch_urdf"))  # .local/lib/python3.10/site-packages/stretch_urdf)
@@ -89,14 +147,26 @@ if __name__ == "__main__":
         fn=a[a.find('stretch_description'):]
         print('%d : %s'%(i,fn))
     print('-------------------')
-    id=0
+    id=-1
     while True:
-        id=int(input('Enter ID of URDF to viz: '))
-
+        try:
+            id=int(input('Enter ID of URDF to viz: '))
+        except:
+            pass
         if id>=0 and id<len(urdf_files):
             break
         print('Invalid entry')
     urdf_name=urdf_files[id]
+
+    model_name=None
+    for m in models:
+        if urdf_name.find(m)>-1:
+            model_name=m
+    print('Using model: %s'%model_name)
+    tool_name=urdf_name[urdf_name.rfind(model_name)+len(model_name)+1:-5]
+    print('Using tool: %s'%tool_name)
+    use_gripper=(tool_name=='tool_stretch_gripper' or tool_name=='tool_dex_wrist' or tool_name=='eoa_wrist_dw3_tool_sg3')
+    use_dw = (tool_name=='tool_dex_wrist' or tool_name=='eoa_wrist_dw3_tool_sg3' or tool_name=='eoa_wrist_dw3_tool_nil')
 
     urdf = urdf_loader.URDF.load(urdf_name)
     tool = stretch_body.device.Device(req_params=False).robot_params['robot']['tool']
@@ -107,40 +177,66 @@ if __name__ == "__main__":
         cfg_trajectory = {
             'joint_left_wheel': [0.0, math.pi],
             'joint_right_wheel': [0.0, math.pi],
-            'joint_lift': [0.9, 0.7],
-            'joint_arm_l0': [0.0, 0.1],
-            'joint_arm_l1': [0.0, 0.1],
-            'joint_arm_l2': [0.0, 0.1],
-            'joint_arm_l3': [0.0, 0.1],
-            'joint_wrist_yaw': [math.pi, 0.0],
-            #'joint_gripper_finger_left': [0.0, 0.25],
-            #'joint_gripper_finger_right': [0.0, 0.25],
+            'joint_lift': [0.7, 0.7],
+            'joint_arm_l0': [0.0, 0.0],
+            'joint_arm_l1': [0.0, 0.0],
+            'joint_arm_l2': [0.0, 0.0],
+            'joint_arm_l3': [0.0, 0.0],
+            'joint_wrist_yaw': [0, 0.0], #math.pi
             'joint_head_pan': [0.0, -(math.pi / 2.0)],
             'joint_head_tilt': [0.5, -0.5]
         }
-        # if tool == 'tool_stretch_dex_wrist':
-        #     cfg_trajectory['joint_wrist_pitch'] = [-math.pi/2, 0.0]
-        #     cfg_trajectory['joint_wrist_roll'] = [-math.pi, 0.0]
+        if use_gripper:
+            cfg_trajectory['joint_gripper_finger_left']= [0.0, 0.25]
+            cfg_trajectory['joint_gripper_finger_right']=[0.0, 0.25]
+        if use_dw:
+            cfg_trajectory['joint_wrist_pitch'] = [0, 0.0] #9math.pi
+            cfg_trajectory['joint_wrist_roll'] = [0.0,math.pi]
         urdf.animate(cfg_trajectory=cfg_trajectory, use_collision=args.collision)
-    else:
-        cfg_pose = {
-            'joint_left_wheel': 0.0,
-            'joint_right_wheel': 0.0,
-            'joint_lift': 0.6,
-            'joint_arm_l0': 0.1,
-            'joint_arm_l1': 0.1,
-            'joint_arm_l2': 0.1,
-            'joint_arm_l3': 0.1,
-            'joint_wrist_yaw': math.pi,
-            #'joint_gripper_finger_left': 0.0,
-            #'joint_gripper_finger_right': 0.0,
-            'joint_head_pan': -(math.pi / 2.0),
-            'joint_head_tilt': -0.5
-        }
-        # if tool == 'tool_stretch_dex_wrist':
-        #     cfg_pose['joint_wrist_pitch'] = -math.pi/2
-        #     cfg_pose['joint_wrist_roll'] = math.pi/4
-        urdf.show(cfg=cfg_pose, use_collision=args.collision)
+        exit()
+
+    if args.gamepad:
+        import stretch_body.gamepad_teleop
+
+        r = stretch_body.robot.Robot()
+        r.startup()
+        if not r.is_homed():
+            print('Exiting because the robot has not been calibrated')
+            exit()
+
+        gamepad = stretch_body.gamepad_teleop.GamePadTeleop(robot_instance = False)
+        gamepad.startup(robot=r)
+
+        stretch_state = StretchState(r, use_gripper,use_dw)
+        viz.show(cfg=stretch_state.get_urdf_configuration(), use_collision=args.collision)
+        while viz.viewer.is_active:
+            viz.update_pose(cfg=stretch_state.get_urdf_configuration(), use_collision=args.collision)
+            gamepad.step_mainloop(r)
+
+        gamepad.gamepad_controller.stop()
+        r.stop()
+        exit()
+
+    cfg_pose = {
+        'joint_left_wheel': 0.0,
+        'joint_right_wheel': 0.0,
+        'joint_lift': 0.6,
+        'joint_arm_l0': 0.1,
+        'joint_arm_l1': 0.1,
+        'joint_arm_l2': 0.1,
+        'joint_arm_l3': 0.1,
+        'joint_wrist_yaw': 0,
+        'joint_head_pan': 0,
+        'joint_head_tilt': 0
+    }
+    if use_gripper:
+        cfg_pose['joint_gripper_finger_left'] = 0
+        cfg_pose['joint_gripper_finger_right'] = 0
+    if use_dw:
+        cfg_pose['joint_wrist_pitch'] = 0
+        cfg_pose['joint_wrist_roll'] = 0
+    urdf.show(cfg=cfg_pose, use_collision=args.collision)
+
 
 
 

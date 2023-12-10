@@ -46,7 +46,7 @@
     type="fixed">
     <origin
       xyz="0 0 0"
-      rpy="3.14159265358979 0 1.5707963267949" />
+      rpy="-3.14159265358979 0 -1.5707963267949" />
     <parent
       link="link_wrist_yaw" />
     <child
@@ -105,7 +105,7 @@
     <child
       link="link_wrist_pitch" />
     <axis
-      xyz="0 0 1" />
+      xyz="0 0 -1" />
     <limit effort="100" lower="-1.57" upper="0.56" velocity="1.0"/>
   </joint>
   <link
@@ -159,7 +159,7 @@
     <child
       link="link_wrist_roll" />
     <axis
-      xyz="0 0 -1" />
+      xyz="0 0 1" />
     <limit effort="100" lower="-3.14" upper="3.14" velocity="1.0"/>
   </joint>
 
