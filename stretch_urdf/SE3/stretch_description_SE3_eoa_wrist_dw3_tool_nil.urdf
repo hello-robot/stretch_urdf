@@ -843,7 +843,7 @@
     </collision>
   </link>
   <joint name="joint_wrist_yaw_bottom" type="fixed">
-    <origin rpy="-3.14159265358979 0 1.5707963267949" xyz="0 0 0"/>
+    <origin rpy="3.14159265358979 0 1.5707963267949" xyz="0 0 0"/>
     <parent link="link_wrist_yaw"/>
     <child link="link_wrist_yaw_bottom"/>
     <axis xyz="0 0 0"/>
