@@ -903,7 +903,7 @@
     <origin rpy="3.14159265358979 1.5707963267949 0" xyz="-0.0188587444077927 -0.0240000000000002 0.0195500000000002"/>
     <parent link="link_wrist_pitch"/>
     <child link="link_wrist_roll"/>
-    <axis xyz="0 0 -1"/>
+    <axis xyz="0 0 1"/>
     <limit effort="100" lower="-3.14" upper="3.14" velocity="1.0"/>
   </joint>
 </robot>

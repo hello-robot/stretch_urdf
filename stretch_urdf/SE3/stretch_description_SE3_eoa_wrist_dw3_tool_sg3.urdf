@@ -960,7 +960,7 @@
     <origin rpy="-1.57079632679513 1.48789318732515 3.14159265358956" xyz="-0.0246929393014972 0 0.0371909405167257"/>
     <parent link="link_gripper_s3_body"/>
     <child link="link_gripper_finger_right"/>
-    <axis xyz="0 0 -1"/>
+    <axis xyz="0 0 1"/>
     <limit effort="0" lower="0" upper="0" velocity="0"/>
   </joint>
   <link name="link_gripper_fingertip_right">
@@ -1017,7 +1017,7 @@
     <origin rpy="-1.57079632679523 -1.48789318734672 -3.14159265358946" xyz="0.0245029393015013 0 0.0371909405167127"/>
     <parent link="link_gripper_s3_body"/>
     <child link="link_gripper_finger_left"/>
-    <axis xyz="0 0 1"/>
+    <axis xyz="0 0 -1"/>
     <limit effort="0" lower="0" upper="0" velocity="0"/>
   </joint>
   <link name="link_gripper_fingertip_left">
