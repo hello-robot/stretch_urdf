@@ -924,7 +924,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="./meshes/link_gripper_s3_body.STL"/>
+        <mesh filename="./meshes/link_gripper_s3_body_collision.STL"/>
       </geometry>
     </collision>
   </link>
@@ -952,7 +952,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="./meshes/link_gripper_finger_right.STL"/>
+        <mesh filename="./meshes/link_gripper_finger_right_collision.STL"/>
       </geometry>
     </collision>
   </link>
@@ -981,7 +981,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="./meshes/link_gripper_fingertip_right.STL"/>
+        <mesh filename="./meshes/link_gripper_fingertip_right_collision.STL"/>
       </geometry>
     </collision>
   </link>
@@ -1009,7 +1009,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="./meshes/link_gripper_finger_left.STL"/>
+        <mesh filename="./meshes/link_gripper_finger_left_collision.STL"/>
       </geometry>
     </collision>
   </link>
@@ -1038,7 +1038,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="./meshes/link_gripper_fingertip_left.STL"/>
+        <mesh filename="./meshes/link_gripper_fingertip_left_collision.STL"/>
       </geometry>
     </collision>
   </link>
@@ -1051,7 +1051,7 @@
   <link name="link_grasp_center">
   </link>
   <joint name="joint_grasp_center" type="fixed">
-    <origin rpy="-1.5707963267949 -1.5707963267949 0" xyz="0 0 0.23"/>
+    <origin rpy="-1.5707963267949 -1.5707963267948 0" xyz="0 0 0.23"/>
     <parent link="link_gripper_s3_body"/>
     <child link="link_grasp_center"/>
   </joint>

@@ -33,6 +33,9 @@ def generate_from_descriptions(root_dir,xacro_dir,descriptions):
 
             open_file.close()
 def main():
+
+    #Descriptions should include all configurations that we officially "support"
+
     root_dir = './stretch_urdf/RE1V0/'
     xacro_dir = root_dir + 'xacro/'
     descriptions = ['stretch_description_RE1V0_tool_none',
