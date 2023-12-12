@@ -40,14 +40,14 @@ def main():
     xacro_dir = root_dir + 'xacro/'
     descriptions = ['stretch_description_RE1V0_tool_none',
                     'stretch_description_RE1V0_tool_stretch_gripper',
-                    'stretch_description_RE1V0_tool_dex_wrist']
+                    'stretch_description_RE1V0_tool_stretch_dex_wrist']
     generate_from_descriptions(root_dir, xacro_dir, descriptions)
 
     root_dir='./stretch_urdf/RE2V0/'
     xacro_dir=root_dir+'xacro/'
     descriptions=['stretch_description_RE2V0_tool_none',
                   'stretch_description_RE2V0_tool_stretch_gripper',
-                  'stretch_description_RE2V0_tool_dex_wrist']
+                  'stretch_description_RE2V0_tool_stretch_dex_wrist']
     generate_from_descriptions(root_dir, xacro_dir, descriptions)
 
     root_dir='./stretch_urdf/SE3/'
