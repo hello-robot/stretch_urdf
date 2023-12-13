@@ -2,9 +2,17 @@
 
 
 import urchin as urdf_loader
-import importlib.resources as importlib_resources
 import time
 import stretch_body.robot
+try:
+    # works on ubunut 22.04
+    import importlib.resources as importlib_resources
+    str(importlib_resources.files("stretch_body"))
+except AttributeError as e:
+    # works on ubuntu 20.04
+    import importlib_resources
+    str(importlib_resources.files("stretch_body"))
+
 
 def get_configuration(robot):
     s = robot.get_status()

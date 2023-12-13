@@ -12,7 +12,14 @@ from hello_helpers.gripper_conversion import GripperConversion
 import stretch_body.robot
 import stretch_body.device
 import stretch_body.hello_utils as hu
-import importlib.resources as importlib_resources
+try:
+    # works on ubunut 22.04
+    import importlib.resources as importlib_resources
+    str(importlib_resources.files("stretch_body"))
+except AttributeError as e:
+    # works on ubuntu 20.04
+    import importlib_resources
+    str(importlib_resources.files("stretch_body"))
 
 hu.print_stretch_re_use()
 warnings.filterwarnings("ignore")
