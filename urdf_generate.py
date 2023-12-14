@@ -3,7 +3,21 @@ import subprocess
 import shlex
 import sys
 import os
-from ament_index_python.packages import get_package_share_directory
+
+def get_ros_version():
+    if 'ROS_DISTRO' in os.environ.keys():
+        if os.environ['ROS_DISTRO'] == 'noetic':
+            print(f"Found ROS_DISTRO = noetic")
+            return 1
+        if os.environ['ROS_DISTRO'] == 'humble':
+            print(f"Found ROS_DISTRO = humble")
+            return 2
+
+ros_version = get_ros_version()
+
+if ros_version is None:
+    print("Unable to find a valid ROS Installation")
+    sys.exit()
 
 #Factory tool to generate URDFs from Xacros
 
@@ -17,7 +31,11 @@ def run_cmd(cmdstr):
 def generate_from_descriptions(root_dir,xacro_dir,descriptions):
     urdfs = []
     for d in descriptions:
-        bashCommand = "ros2 run xacro xacro {}".format(xacro_dir + d + '.xacro')
+        if ros_version==2:
+            bashCommand = "ros2 run xacro xacro {}".format(xacro_dir + d + '.xacro')
+        if ros_version==1:
+            bashCommand = f"rosrun xacro xacro {xacro_dir + d}.xacro"
+
         print(bashCommand)
         process = run_cmd(bashCommand)
         urdf = process.stdout
@@ -32,6 +50,7 @@ def generate_from_descriptions(root_dir,xacro_dir,descriptions):
                 print(u, file=open_file)
 
             open_file.close()
+            
 def main():
 
     #Descriptions should include all configurations that we officially "support"
