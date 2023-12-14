@@ -44,9 +44,9 @@ def generate_from_descriptions(root_dir,xacro_dir,descriptions):
         urdf_lines = urdf.split('\n')
         with open(urdf_filepath, "w") as open_file:
             for u in urdf_lines:
-                if u.find('d435.dae') > -1:  # Replace path for realsense
-                    ss = u.find('file://')
-                    u = u[:ss] + './meshes/d435.dae"/>'
+                # if u.find('d435.dae') > -1:  # Replace path for realsense
+                #     ss = u.find('file://')
+                #     u = u[:ss] + './meshes/d435.dae"/>'
                 print(u, file=open_file)
 
             open_file.close()
