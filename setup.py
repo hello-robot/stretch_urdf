@@ -8,7 +8,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="hello_robot_stretch_urdf",
-    version="0.0.17",
+    version="0.0.18",
     author="Hello Robot Inc.",
     author_email="support@hello-robot.com",
     description="Stretch URDF",
