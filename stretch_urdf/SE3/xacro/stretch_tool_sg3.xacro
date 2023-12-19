@@ -165,6 +165,59 @@
     <axis
       xyz="0 0 0" />
   </joint>
+<link
+    name="link_aruco_fingertip_right">
+    <inertial>
+      <origin
+        xyz="0.0342056670333665 6.03801974164431E-05 -0.00271233349153466"
+        rpy="0 0 0" />
+      <mass
+        value="7.44175884388862E-05" />
+      <inertia
+        ixx="3.5091723215454E-09"
+        ixy="3.33635747829673E-10"
+        ixz="5.87045811365662E-10"
+        iyy="1.9652915014424E-09"
+        iyz="1.21433481297154E-10"
+        izz="2.10994441212058E-09" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://stretch_description_SE3_SG3.SLDASM4/meshes/link_aruco_fingertip_right.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://stretch_description_SE3_SG3.SLDASM4/meshes/link_aruco_fingertip_right.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint_aruco_fingertip_right"
+    type="fixed">
+    <origin
+      xyz="-0.177784508377902 -0.0106721811879468 0"
+      rpy="-1.5707963267949 0 0.261799387799172" />
+    <parent
+      link="link_gripper_finger_right" />
+    <child
+      link="link_aruco_fingertip_right" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
   <link
     name="link_gripper_finger_left">
     <inertial>
@@ -280,7 +333,112 @@
   <link
       name="link_grasp_center">
   </link>
-
+<link
+    name="link_aruco_fingertip_left">
+    <inertial>
+      <origin
+        xyz="1.11022302462516E-16 1.66533453693773E-16 -0.000133556861164008"
+        rpy="0 0 0" />
+      <mass
+        value="7.44175884388882E-05" />
+      <inertia
+        ixx="1.89627721063294E-09"
+        ixy="-5.82320729207535E-23"
+        ixz="6.61657102455893E-24"
+        iyy="1.89627721063281E-09"
+        iyz="1.93870456067116E-24"
+        izz="3.79185381384285E-09" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://stretch_description_SE3_SG3.SLDASM4/meshes/link_aruco_fingertip_left.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://stretch_description_SE3_SG3.SLDASM4/meshes/link_aruco_fingertip_left.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint_aruco_fingertip_left"
+    type="fixed">
+    <origin
+      xyz="0.143934974292929 -0.00436381846064454 -8.58640479230455E-05"
+      rpy="-1.76278254451424 0 0.959931088596885" />
+    <parent
+      link="link_gripper_finger_left" />
+    <child
+      link="link_aruco_fingertip_left" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+<link
+    name="link_aruco_d405">
+    <inertial>
+      <origin
+        xyz="-2.94593661126497E-06 6.87711987940043E-06 0.000123133477759885"
+        rpy="0 0 0" />
+      <mass
+        value="0.000393662237156561" />
+      <inertia
+        ixx="5.28754465024473E-08"
+        ixy="3.78334824258601E-13"
+        ixz="1.41329092888301E-13"
+        iyy="5.28872681828417E-08"
+        iyz="-3.29924653050378E-13"
+        izz="1.05758729446112E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://stretch_description_SE3_SG3.SLDASM4/meshes/link_aruco_d405.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://stretch_description_SE3_SG3.SLDASM4/meshes/link_aruco_d405.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint_aruco_d405"
+    type="fixed">
+    <origin
+      xyz="0 0.0671264013906604 0.0297716109784749"
+      rpy="2.96705999342568 -0.000305721573415565 3.1398588194619" />
+    <parent
+      link="link_gripper_s3_body" />
+    <child
+      link="link_aruco_d405" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
   <joint
     name="joint_grasp_center"
     type="fixed">
