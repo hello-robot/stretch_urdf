@@ -187,7 +187,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://stretch_description_SE3_SG3.SLDASM4/meshes/link_aruco_fingertip_right.STL" />
+          filename="./meshes/link_aruco_fingertip_right.STL" />
       </geometry>
       <material
         name="">
@@ -201,7 +201,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://stretch_description_SE3_SG3.SLDASM4/meshes/link_aruco_fingertip_right.STL" />
+          filename="./meshes/link_aruco_fingertip_right.STL" />
       </geometry>
     </collision>
   </link>
@@ -355,7 +355,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://stretch_description_SE3_SG3.SLDASM4/meshes/link_aruco_fingertip_left.STL" />
+          filename="./meshes/link_aruco_fingertip_left.STL" />
       </geometry>
       <material
         name="">
@@ -369,7 +369,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://stretch_description_SE3_SG3.SLDASM4/meshes/link_aruco_fingertip_left.STL" />
+          filename="./meshes/link_aruco_fingertip_left.STL" />
       </geometry>
     </collision>
   </link>
@@ -408,7 +408,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://stretch_description_SE3_SG3.SLDASM4/meshes/link_aruco_d405.STL" />
+          filename="./meshes/link_aruco_d405.STL" />
       </geometry>
       <material
         name="">
@@ -422,7 +422,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://stretch_description_SE3_SG3.SLDASM4/meshes/link_aruco_d405.STL" />
+          filename="./meshes/link_aruco_d405.STL" />
       </geometry>
     </collision>
   </link>
