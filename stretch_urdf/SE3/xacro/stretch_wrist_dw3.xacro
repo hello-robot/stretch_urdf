@@ -164,4 +164,58 @@
   </joint>
 
 
+<link
+    name="link_wrist_quick_connect">
+    <inertial>
+      <origin
+        xyz="-0.00028287 -0.00055747 -0.0013365"
+        rpy="0 0 0" />
+      <mass
+        value="0.022192" />
+      <inertia
+        ixx="2.2061E-06"
+        ixy="3.0174E-09"
+        ixz="1.8354E-08"
+        iyy="2.9144E-06"
+        iyz="4.551E-08"
+        izz="4.8373E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://stretch_description_SE3_DW3.SLDASM4/meshes/link_wrist_quick_connect.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.89804 0.91765 0.92941 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://stretch_description_SE3_DW3.SLDASM4/meshes/link_wrist_quick_connect.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint_wrist_quick_connect"
+    type="fixed">
+    <origin
+      xyz="0 0 0.0209999999999871"
+      rpy="0 0 -3.14159265358975" />
+    <parent
+      link="link_wrist_roll" />
+    <child
+      link="link_wrist_quick_connect" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+
 </robot>
