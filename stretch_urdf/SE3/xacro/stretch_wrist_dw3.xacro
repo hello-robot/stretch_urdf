@@ -164,4 +164,19 @@
   </joint>
 
 
+<link
+    name="link_wrist_quick_connect">
+</link>
+<joint
+  name="joint_wrist_quick_connect"
+  type="fixed">
+  <origin
+    xyz="0 0 0.0209999999999871"
+    rpy="0 0 -3.14159265358975" />
+  <parent
+    link="link_wrist_roll" />
+  <child
+    link="link_wrist_quick_connect" />
+</joint>
+
 </robot>

@@ -906,6 +906,13 @@
     <axis xyz="0 0 1"/>
     <limit effort="100" lower="-3.14" upper="3.14" velocity="1.0"/>
   </joint>
+  <link name="link_wrist_quick_connect">
+</link>
+  <joint name="joint_wrist_quick_connect" type="fixed">
+    <origin rpy="0 0 -3.14159265358975" xyz="0 0 0.0209999999999871"/>
+    <parent link="link_wrist_roll"/>
+    <child link="link_wrist_quick_connect"/>
+  </joint>
 </robot>
 
 
