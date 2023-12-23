@@ -5,7 +5,6 @@ import sys
 from stretch_body.robot_params import RobotParams
 import re
 import stretch_body.hello_utils as hu
-hu.print_stretch_re_use()
 import shutil
 
 root_dir = None
@@ -36,6 +35,7 @@ if ros_version is None:
     sys.exit()
 
 def make_uncalibrated_urdf(root_dir,filename):
+    print("\nCopying URDF and Meshes to Stretch Description ROS package....")
     if root_dir:
         urdf_file = f"{root_dir}/{model_name}/{filename}"
         if os.path.isfile(urdf_file):
@@ -86,15 +86,14 @@ def make_uncalibrated_urdf(root_dir,filename):
                 file.write(line)
         print(f"Successfully copied Uncalibrated URDF to {ros_uncalibrated_urdf_path}")
 
-        print("\n")
         # Copy mesh files
         src_meshes_dir = f"{root_dir}/{model_name}/meshes"
         dst_meshes_dir = f"{ros_repo_path}/stretch_description/meshes"
         for f in os.listdir(src_meshes_dir):
             # ignore collision meshes
             if 'collision' not in f:
-                print(f"Copying {f} ...")
                 shutil.copy(f"{src_meshes_dir}/{f}",f"{dst_meshes_dir}/{f}")
+        print(f"Successfully copied Mesh files to {dst_meshes_dir}")
     else:
         print(f"ERROR : Unable to find the directory = {root_dir}")
 
@@ -103,5 +102,4 @@ print(f"Robot Model Name = {model_name}")
 print(f"Robot Tool Name = {tool_name}")
 uncalibrated_urdf_file = f"stretch_description_{model_name}_{tool_name}.urdf"
 print(f"URDF to be copied = {uncalibrated_urdf_file}")
-print("\nCopying URDF and Meshes to Stretch Description ROS package....")
 make_uncalibrated_urdf(root_dir,uncalibrated_urdf_file)
