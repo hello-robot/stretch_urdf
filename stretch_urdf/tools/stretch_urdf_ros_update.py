@@ -64,7 +64,7 @@ def make_uncalibrated_urdf(root_dir,filename):
         for line in updated_urdf_lines:
             if '<robot name="stretch">' in line:
                 mesh_path_replaced_urdf_lines.append(re.sub('<robot name="stretch">', '<robot name="stretch_description">', line))
-            
+                continue
             if './meshes' in line:
                 l = re.sub('./meshes', 'package://stretch_description/meshes', line)
                 if '_collision.STL' in l:
