@@ -5,16 +5,16 @@
     name="link_wrist_yaw_bottom">
     <inertial>
       <origin
-        xyz="0.0165399153795965 0.0446328107020905 -0.0281087384763347"
+        xyz="-0.0165399153795968 -0.0446328107020906 -0.0281087384763343"
         rpy="0 0 0" />
       <mass
         value="0.144548635554334" />
       <inertia
         ixx="4.56525957614798E-05"
         ixy="-1.08217417869179E-06"
-        ixz="1.44384040302049E-08"
+        ixz="-1.44384040297111E-08"
         iyy="7.22875259104698E-05"
-        iyz="-3.40820143538192E-09"
+        iyz="3.40820143544021E-09"
         izz="8.76544308203217E-05" />
     </inertial>
     <visual>
@@ -23,7 +23,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="./meshes/link_wrist_yaw_bottom.STL" />
+          filename="./link_wrist_yaw_bottom.STL" />
       </geometry>
       <material
         name="">
