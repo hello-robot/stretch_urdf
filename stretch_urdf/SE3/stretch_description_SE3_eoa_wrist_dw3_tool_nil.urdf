@@ -913,6 +913,33 @@
     <parent link="link_wrist_roll"/>
     <child link="link_wrist_quick_connect"/>
   </joint>
+  <link name="link_head_nav_cam">
+    <inertial>
+      <origin rpy="0 0 0" xyz="-0.00024249 -6.9219E-05 -0.013999"/>
+      <mass value="0.028346"/>
+      <inertia ixx="4.0382E-06" ixy="-4.2974E-25" ixz="-1.5541E-23" iyy="4.0377E-06" iyz="3.2691E-21" izz="5.3782E-06"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="./meshes/link_head_nav_cam.STL"/>
+      </geometry>
+      <material name="">
+        <color rgba="0.79216 0.81961 0.93333 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="./meshes/link_head_nav_cam_collision.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="joint_head_nav_cam" type="fixed">
+    <origin rpy="3.1416 0 0" xyz="0.056341 0.006923 -0.01995"/>
+    <parent link="link_camera"/>
+    <child link="link_head_nav_cam"/>
+    <axis xyz="0 0 0"/>
+  </joint>
 </robot>
-
 
