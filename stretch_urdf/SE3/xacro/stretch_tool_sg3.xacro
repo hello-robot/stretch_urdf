@@ -45,8 +45,8 @@
     name="joint_gripper_s3_body"
     type="fixed">
     <origin
-      xyz="0.264908773358287 -0.344377775078258 0.231087504687337"
-      rpy="0 -1.5707963267949 0" />
+      xyz="0 0 0.0209999999993159"
+      rpy="0 0 -3.14159265358975" />
     <parent
       link="link_wrist_roll" />
     <child
@@ -269,7 +269,7 @@
     <child
       link="link_gripper_finger_left" />
     <axis
-      xyz="0 0 -1" />
+      xyz="0 0 1" />
     <limit
       lower="0"
       upper="0"
@@ -321,7 +321,7 @@
     type="fixed">
     <origin
       xyz="0.177784508377884 -0.0106721811879429 0"
-      rpy="1.57079632679491 -0.19873576525056 2.87979326579064" />
+      rpy="1.57079632679491 0 2.87979326579064" />
     <parent
       link="link_gripper_finger_left" />
     <child

@@ -704,9 +704,9 @@
   <joint
     name="joint_wrist_yaw"
     type="revolute">
-    <origin
+   <origin
       xyz="0.0830000000000654 -0.0307500000000129 0"
-      rpy="1.5708 4.2595E-14 2.6415E-15"/>
+      rpy="-1.5707963267949 0 3.14159265358978" />
     <parent
       link="link_arm_l0" />
     <child
