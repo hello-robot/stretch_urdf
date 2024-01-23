@@ -822,9 +822,9 @@
   </joint>
   <link name="link_wrist_yaw_bottom">
     <inertial>
-      <origin rpy="0 0 0" xyz="0.0165399153795965 0.0446328107020905 -0.0281087384763347"/>
+      <origin rpy="0 0 0" xyz="-0.0165399153795968 -0.0446328107020906 -0.0281087384763343"/>
       <mass value="0.144548635554334"/>
-      <inertia ixx="4.56525957614798E-05" ixy="-1.08217417869179E-06" ixz="1.44384040302049E-08" iyy="7.22875259104698E-05" iyz="-3.40820143538192E-09" izz="8.76544308203217E-05"/>
+      <inertia ixx="4.56525957614798E-05" ixy="-1.08217417869179E-06" ixz="-1.44384040297111E-08" iyy="7.22875259104698E-05" iyz="3.40820143544021E-09" izz="8.76544308203217E-05"/>
     </inertial>
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
@@ -1139,6 +1139,8 @@
     <child link="link_aruco_d405"/>
     <axis xyz="0 0 0"/>
   </joint>
+  <link name="link_grasp_center">
+  </link>
   <joint name="joint_grasp_center" type="fixed">
     <origin rpy="-1.5707963267949 -1.5707963267948 0" xyz="0 0 0.23"/>
     <parent link="link_gripper_s3_body"/>
@@ -1146,9 +1148,9 @@
   </joint>
   <link name="link_head_nav_cam">
     <inertial>
-      <origin rpy="0 0 0" xyz="-0.00024249 -6.9219E-05 -0.013999"/>
-      <mass value="0.028346"/>
-      <inertia ixx="4.0382E-06" ixy="-4.2974E-25" ixz="-1.5541E-23" iyy="4.0377E-06" iyz="3.2691E-21" izz="5.3782E-06"/>
+      <origin rpy="0 0 0" xyz="-0.000242485173502102 -6.9219046065605E-05 -0.0139988115298306"/>
+      <mass value="0.028346169831483"/>
+      <inertia ixx="4.03820640553667E-06" ixy="-4.29737468694014E-25" ixz="-3.42669828325649E-22" iyy="4.03772087509678E-06" iyz="-2.25687766186513E-21" izz="5.37818026653469E-06"/>
     </inertial>
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
@@ -1156,7 +1158,7 @@
         <mesh filename="./meshes/link_head_nav_cam.STL"/>
       </geometry>
       <material name="">
-        <color rgba="0.79216 0.81961 0.93333 1"/>
+        <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1"/>
       </material>
     </visual>
     <collision>
@@ -1167,8 +1169,8 @@
     </collision>
   </link>
   <joint name="joint_head_nav_cam" type="fixed">
-    <origin rpy="3.1416 0 0" xyz="0.056341 0.006923 -0.01995"/>
-    <parent link="link_camera"/>
+    <origin rpy="0 1.5707963267949 0" xyz="0.0402000000000069 -0.0411729746231231 -0.0245785717313561"/>
+    <parent link="link_head_tilt"/>
     <child link="link_head_nav_cam"/>
     <axis xyz="0 0 0"/>
   </joint>

@@ -23,7 +23,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="./link_wrist_yaw_bottom.STL" />
+          filename="./meshes/link_wrist_yaw_bottom.STL" />
       </geometry>
       <material
         name="">
