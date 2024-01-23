@@ -105,7 +105,7 @@
     <child
       link="link_gripper_finger_right" />
     <axis
-      xyz="0 0 -1" />
+      xyz="0 0 1" />
     <limit
       lower="0"
       upper="0"
@@ -269,7 +269,7 @@
     <child
       link="link_gripper_finger_left" />
     <axis
-      xyz="0 0 1" />
+      xyz="0 0 -1" />
     <limit
       lower="0"
       upper="0"
