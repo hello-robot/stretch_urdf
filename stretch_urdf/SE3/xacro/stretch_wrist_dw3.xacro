@@ -98,14 +98,14 @@
     name="joint_wrist_pitch"
     type="revolute">
     <origin
-      xyz="0 0.0194549999999678 -0.0304999999999953"
-      rpy="1.5707963267949 0 0" />
+      xyz="0 -0.019455 -0.0305"
+      rpy="1.5708 0 3.1416" />
     <parent
       link="link_wrist_yaw_bottom" />
     <child
       link="link_wrist_pitch" />
     <axis
-      xyz="0 0 -1" />
+      xyz="0 0 1" />
     <limit effort="100" lower="-1.57" upper="0.56" velocity="1.0"/>
   </joint>
   <link
@@ -152,14 +152,14 @@
     name="joint_wrist_roll"
     type="revolute">
     <origin
-      xyz="-0.0188587444077927 -0.0240000000000002 0.0195500000000002"
-      rpy="3.14159265358979 1.5707963267949 0" />
+      xyz="-0.018859 -0.024 0.01955"
+      rpy="3.1416 1.5708 0" />
     <parent
       link="link_wrist_pitch" />
     <child
       link="link_wrist_roll" />
     <axis
-      xyz="0 0 1" />
+      xyz="0 0 -1" />
     <limit effort="100" lower="-3.14" upper="3.14" velocity="1.0"/>
   </joint>
 
@@ -167,16 +167,17 @@
 <link
     name="link_wrist_quick_connect">
 </link>
-<joint
-  name="joint_wrist_quick_connect"
-  type="fixed">
-  <origin
-    xyz="0 0 0.0209999999999871"
-    rpy="0 0 -3.14159265358975" />
-  <parent
-    link="link_wrist_roll" />
-  <child
-    link="link_wrist_quick_connect" />
-</joint>
-
+ <joint
+    name="joint_wrist_quick_connect"
+    type="fixed">
+    <origin
+      xyz="0 0 0.0085"
+      rpy="1.5708 0 -1.5708" />
+    <parent
+      link="link_wrist_roll" />
+    <child
+      link="link_wrist_quick_connect" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
 </robot>
