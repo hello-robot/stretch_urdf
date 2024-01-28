@@ -3,7 +3,9 @@ import subprocess
 import shlex
 import sys
 import os
+import glob
 
+#This script generates
 def get_ros_version():
     if 'ROS_DISTRO' in os.environ.keys():
         if os.environ['ROS_DISTRO'] == 'noetic':
@@ -50,30 +52,22 @@ def generate_from_descriptions(root_dir,xacro_dir,descriptions):
                 print(u, file=open_file)
 
             open_file.close()
-            
+
+def get_descriptions(xacro_dir):
+    descriptions=[]
+    d=glob.glob(xacro_dir+'stretch_description*.xacro')
+    for a in d:
+        descriptions.append(a[a.rfind('/')+1:-6])
+    return descriptions
+
 def main():
 
     #Descriptions should include all configurations that we officially "support"
+    for model_name in ['RE1V0', 'RE2V0', 'SE3', 'EOA_3rd_Party']:
+        root_dir = './stretch_urdf/'+model_name+'/'
+        xacro_dir = root_dir + 'xacro/'
+        generate_from_descriptions(root_dir, xacro_dir, get_descriptions(xacro_dir))
 
-    root_dir = './stretch_urdf/RE1V0/'
-    xacro_dir = root_dir + 'xacro/'
-    descriptions = ['stretch_description_RE1V0_tool_none',
-                    'stretch_description_RE1V0_tool_stretch_gripper',
-                    'stretch_description_RE1V0_tool_stretch_dex_wrist']
-    generate_from_descriptions(root_dir, xacro_dir, descriptions)
-
-    root_dir='./stretch_urdf/RE2V0/'
-    xacro_dir=root_dir+'xacro/'
-    descriptions=['stretch_description_RE2V0_tool_none',
-                  'stretch_description_RE2V0_tool_stretch_gripper',
-                  'stretch_description_RE2V0_tool_stretch_dex_wrist']
-    generate_from_descriptions(root_dir, xacro_dir, descriptions)
-
-    root_dir='./stretch_urdf/SE3/'
-    xacro_dir=root_dir+'xacro/'
-    descriptions=['stretch_description_SE3_eoa_wrist_dw3_tool_nil',
-                  'stretch_description_SE3_eoa_wrist_dw3_tool_sg3']
-    generate_from_descriptions(root_dir, xacro_dir, descriptions)
 
 if __name__ == '__main__':
      main()
