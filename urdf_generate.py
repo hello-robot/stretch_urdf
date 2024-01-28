@@ -63,7 +63,7 @@ def get_descriptions(xacro_dir):
 def main():
 
     #Descriptions should include all configurations that we officially "support"
-    for model_name in ['RE1V0', 'RE2V0', 'SE3', 'EOA_3rd_Party']:
+    for model_name in ['RE1V0', 'RE2V0', 'SE3']:
         root_dir = './stretch_urdf/'+model_name+'/'
         xacro_dir = root_dir + 'xacro/'
         generate_from_descriptions(root_dir, xacro_dir, get_descriptions(xacro_dir))
