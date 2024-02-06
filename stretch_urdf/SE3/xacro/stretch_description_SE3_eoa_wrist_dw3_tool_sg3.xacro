@@ -9,6 +9,7 @@
   <xacro:include filename="stretch_respeaker.xacro" />
   <xacro:include filename="stretch_wrist_dw3.xacro" />
   <xacro:include filename="stretch_tool_sg3.xacro" />
+  <xacro:include filename="stretch_head_nav_cam.xacro" />
 </robot>
 
   

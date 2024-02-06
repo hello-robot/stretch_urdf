@@ -381,7 +381,7 @@
     </collision>
   </link>
   <joint name="joint_wrist_yaw" type="revolute">
-    <origin rpy="1.5708 4.2595E-14 2.6415E-15" xyz="0.0830000000000654 -0.0307500000000129 0"/>
+    <origin rpy="-1.5707963267949 0 3.14159265358978" xyz="0.0830000000000654 -0.0307500000000129 0"/>
     <parent link="link_arm_l0"/>
     <child link="link_wrist_yaw"/>
     <axis xyz="0 0 -1"/>
@@ -822,9 +822,9 @@
   </joint>
   <link name="link_wrist_yaw_bottom">
     <inertial>
-      <origin rpy="0 0 0" xyz="0.0165399153795965 0.0446328107020905 -0.0281087384763347"/>
+      <origin rpy="0 0 0" xyz="-0.0165399153795968 -0.0446328107020906 -0.0281087384763343"/>
       <mass value="0.144548635554334"/>
-      <inertia ixx="4.56525957614798E-05" ixy="-1.08217417869179E-06" ixz="1.44384040302049E-08" iyy="7.22875259104698E-05" iyz="-3.40820143538192E-09" izz="8.76544308203217E-05"/>
+      <inertia ixx="4.56525957614798E-05" ixy="-1.08217417869179E-06" ixz="-1.44384040297111E-08" iyy="7.22875259104698E-05" iyz="3.40820143544021E-09" izz="8.76544308203217E-05"/>
     </inertial>
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
@@ -871,7 +871,7 @@
     </collision>
   </link>
   <joint name="joint_wrist_pitch" type="revolute">
-    <origin rpy="1.5707963267949 0 0" xyz="0 0.0194549999999678 -0.0304999999999953"/>
+    <origin rpy="1.5708 0 3.1416" xyz="0 -0.019455 -0.0305"/>
     <parent link="link_wrist_yaw_bottom"/>
     <child link="link_wrist_pitch"/>
     <axis xyz="0 0 -1"/>
@@ -900,7 +900,7 @@
     </collision>
   </link>
   <joint name="joint_wrist_roll" type="revolute">
-    <origin rpy="3.14159265358979 1.5707963267949 0" xyz="-0.0188587444077927 -0.0240000000000002 0.0195500000000002"/>
+    <origin rpy="3.1416 1.5708 0" xyz="-0.018859 -0.024 0.01955"/>
     <parent link="link_wrist_pitch"/>
     <child link="link_wrist_roll"/>
     <axis xyz="0 0 1"/>
@@ -909,10 +909,38 @@
   <link name="link_wrist_quick_connect">
 </link>
   <joint name="joint_wrist_quick_connect" type="fixed">
-    <origin rpy="0 0 -3.14159265358975" xyz="0 0 0.0209999999999871"/>
+    <origin rpy="1.5708 0 -1.5708" xyz="0 0 0.0085"/>
     <parent link="link_wrist_roll"/>
     <child link="link_wrist_quick_connect"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <link name="link_head_nav_cam">
+    <inertial>
+      <origin rpy="0 0 0" xyz="-0.000242485173502102 -6.9219046065605E-05 -0.0139988115298306"/>
+      <mass value="0.028346169831483"/>
+      <inertia ixx="4.03820640553667E-06" ixy="-4.29737468694014E-25" ixz="-3.42669828325649E-22" iyy="4.03772087509678E-06" iyz="-2.25687766186513E-21" izz="5.37818026653469E-06"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="./meshes/link_head_nav_cam.STL"/>
+      </geometry>
+      <material name="">
+        <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="./meshes/link_head_nav_cam_collision.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="joint_head_nav_cam" type="fixed">
+    <origin rpy="0 1.5707963267949 0" xyz="0.0402000000000069 -0.0411729746231231 -0.0245785717313561"/>
+    <parent link="link_head_tilt"/>
+    <child link="link_head_nav_cam"/>
+    <axis xyz="0 0 0"/>
   </joint>
 </robot>
-
 
