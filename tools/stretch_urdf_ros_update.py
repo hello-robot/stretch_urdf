@@ -2,17 +2,31 @@
 
 import os
 import sys
-from stretch_body.robot_params import RobotParams
 import subprocess
 import shlex
 import re
-import stretch_body.hello_utils as hu
+import argparse
+import click
+
+print("For use with S T R E T C H (R) from Hello Robot Inc.")
+print("---------------------------------------------------------------------\n")
+
+############## Initialize Variables #####################
+try:
+    import stretch_body.robot_params
+    tool_name = stretch_body.robot_params.RobotParams().get_params()[1]['robot']['tool']
+    model_name = stretch_body.robot_params.RobotParams().get_params()[1]['robot']['model_name']
+except ModuleNotFoundError:
+    tool_name = None
+    model_name = None
 
 root_dir = None
-tool_name = RobotParams().get_params()[1]['robot']['tool']
-model_name = RobotParams().get_params()[1]['robot']['model_name']
+ros_repo_path = None
+ros_version = None
+data_dir = None
 
 
+############### Helper Methods ########################
 def run_cmd(cmdstr,verbose=False):
     if verbose:
         print(cmdstr)
@@ -30,40 +44,51 @@ def remove_lines_between_patterns(text, start_pattern, end_pattern):
     cleaned_text = cleaned_text.replace(start_pattern + end_pattern, "")
     return cleaned_text
 
+def verify_ros():
+    global ros_version, ros_repo_path
+    ros_version = get_ros_version()
+
+    # This tool can only be used if there is a valid ros installation present
+    if ros_version is None:
+        print("Unable to find a valid ROS Installation")
+        sys.exit()
+
+    if ros_version==2:
+        ros_repo_path = '/home/hello-robot/ament_ws/src/stretch_ros2'
+        if not os.path.exists(ros_repo_path):
+            print("Unable to find stretch_ros2 packages folder in '~/ament_ws/src/'.")
+            sys.exit(1)
+    else:
+        ros_repo_path = '/home/hello-robot/catkin_ws/src/stretch_ros'
+        if not os.path.exists(ros_repo_path):
+            print("Unable to find stretch_ros packages folder in '~/catkin_ws/src/'.")
+            sys.exit(1)
+
 def get_ros_version():
-    global root_dir
+    global root_dir, data_dir
     if 'ROS_DISTRO' in os.environ.keys():
         if os.environ['ROS_DISTRO'] == 'noetic':
             # works on ubuntu 20.04
             import importlib_resources
-            root_dir = str(importlib_resources.files("stretch_body"))
-            print(f"Found ROS_DISTRO = noetic")
+            root_dir = str(importlib_resources.files("stretch_urdf"))
+            data_dir = f"{root_dir}/{model_name}"
             return 1
         if os.environ['ROS_DISTRO'] == 'humble':
             # works on ubunut 22.04
             import importlib.resources as importlib_resources
             root_dir = importlib_resources.files("stretch_urdf")
-            print(f"Found ROS_DISTRO = humble")
+            data_dir = f"{root_dir}/{model_name}"
             return 2
 
-hu.print_stretch_re_use()
 
-ros_version = get_ros_version()
-
-if ros_version is None:
-    print("Unable to find a valid ROS Installation")
-    sys.exit()
-
-if ros_version==2:
-    ros_repo_path = '/home/hello-robot/ament_ws/src/stretch_ros2'
-else:
-    ros_repo_path = f'/home/hello-robot/catkin_ws/src/stretch_ros'
-
-print(f"Found Stretch URDF files at = {root_dir}")
-print(f"Robot Model Name = {model_name}")
-print(f"Robot Tool Name = {tool_name}")
-data_dir = f"{root_dir}/{model_name}"
-print(f"Data Directory = {data_dir}")
+def print_info():
+    global model_name, tool_name, data_dir, ros_repo_path
+    print(f"Robot Model Name = {model_name}")
+    print(f"Robot Tool Name = {tool_name}")
+    print(f"Found Stretch URDF files at = {data_dir}")
+    print(f"Found ROS_DISTRO = {os.environ['ROS_DISTRO']}")
+    print(f"ROS Package Path = {ros_repo_path}/stretch_description")
+    print("\n")
 
 def search_and_replace(file_path, search_word, replace_word):
    with open(file_path, 'r') as file:
@@ -74,23 +99,40 @@ def search_and_replace(file_path, search_word, replace_word):
    with open(file_path, 'w') as file:
       file.write(updated_contents)
 
-def copy_mesh_files():
+def verify_robot_tool_name():
+    global data_dir, ros_repo_path, model_name, tool_name
+    data_dir = f"{root_dir}/{model_name}"
+    if model_name in os.listdir(root_dir):
+        files = os.listdir(data_dir)
+        fn = f"stretch_description_{model_name}_{tool_name}.urdf"
+        if fn in files:
+            return True
+        else:
+            click.secho(f'Unable to find tool {tool_name} for model {model_name}')
+            return False
+    else:
+        click.secho(f'Unable to find model {model_name}')
+        return False
+
+
+def copy_mesh_files(v=False):
+    global data_dir, ros_repo_path, model_name, tool_name
+    print("\nCopying Mesh Files.......\n")
     for f in os.listdir(f"{data_dir}/meshes/"):
         src = f"{data_dir}/meshes/{f}"
         dst = f"{ros_repo_path}/stretch_description/meshes/"
         cmd = f"cp -r {src} {dst}"
-        print(cmd)
-        os.system(cmd)
-        
-stretch_description_xacro = f"stretch_description_{model_name}_{tool_name}.xacro"
-def copy_xacro_files():
+        run_cmd(cmd,v)
+    
+def copy_xacro_files(v=False):
+    global data_dir, ros_repo_path, model_name, tool_name
+    print("\nCopying Xacro Files.......\n")
     # Process and copy the xacro files to ros
     for f in os.listdir(f"{data_dir}/xacro/"):
         src = f"{data_dir}/xacro/{f}"
         dst = f"{ros_repo_path}/stretch_description/urdf/"
         cmd = f"cp -r {src} {dst}"
-        print(cmd)
-        os.system(cmd)
+        run_cmd(cmd,v)
 
         # Replace meshses path to point to ros package source
         try:
@@ -106,19 +148,54 @@ def copy_xacro_files():
             r = remove_lines_between_patterns(file.read(),'<link\n    name="link_ground">','</link>')
             r = remove_lines_between_patterns(r,'<joint\n    name="joint_ground"','</joint>')
             file.close()
-            os.system(f"rm {main}")
+            run_cmd(f"rm {main}")
             f = open(main, "a")
             f.write(r)
             f.close()
 
+    stretch_description_xacro = f"stretch_description_{model_name}_{tool_name}.xacro"
+    print(f"\nUpdating stretch_description.xacro from {stretch_description_xacro}\n")
+    if stretch_description_xacro in os.listdir(f"{ros_repo_path}/stretch_description/urdf/"):
+        cmd = f"cp {ros_repo_path}/stretch_description/urdf/{stretch_description_xacro} {ros_repo_path}/stretch_description/urdf/stretch_description.xacro"
+        run_cmd(cmd,v)
 
-print("\nCopying Mesh Files.......\n")
-copy_mesh_files()
-print("\nCopying Xacro Files.......\n")
-copy_xacro_files()
 
-print("\nUpdate stretch_description.xacro.......\n")
-if stretch_description_xacro in os.listdir(f"{ros_repo_path}/stretch_description/urdf/"):
-    cmd = f"cp {ros_repo_path}/stretch_description/urdf/{stretch_description_xacro} {ros_repo_path}/stretch_description/urdf/stretch_description.xacro"
-    print(cmd)
-    os.system(cmd)
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description='Tool to update Stretch Description URDF/Mesh files.')
+    parser.add_argument("-v","--verbose", help="Prints more info", action="store_true")
+    parser.add_argument('--model', type=str,choices=['RE1V0','RE2V0','SE3'], help='Choose a Robot model name.')
+    parser.add_argument('--tool', type=str, help='Choose a supported Robot tool name.')
+    parser.add_argument("--ros2_rebuild", help="Rebuild ROS2 Stretch Description package", action="store_true")
+    args = parser.parse_args()
+    
+    verify_ros()
+    
+    if len([x for x in (args.model,args.tool) if x is not None]) == 1:
+        parser.error('--model and --tool must be given together')
+
+    if args.ros2_rebuild:
+        print("Updating Uncalibrated URDF...\n")
+        os.system('ros2 run stretch_calibration update_uncalibrated_urdf')
+        print("\nUpdating URDF after xacro change...\n")
+        os.system('ros2 run stretch_calibration update_urdf_after_xacro_change')
+        print("\nRebuild stretch_description package...\n")
+        os.system('cd ~/ament_ws;colcon build --packages-select stretch_description')
+
+    elif args.model and args.tool:
+        model_name = args.model
+        tool_name = args.tool
+        if verify_robot_tool_name():
+            print_info()
+            x = input("Proceed with URDF Update?(y/n)")
+            if x=='y' or x=='Y':
+                copy_mesh_files(args.verbose)
+                copy_xacro_files(args.verbose)
+    else:
+        if verify_robot_tool_name():
+            print_info()
+            x = input("Proceed with URDF Update?(y/n)")
+            if x=='y' or x=='Y':
+                copy_mesh_files(args.verbose)
+                copy_xacro_files(args.verbose)
+
+        
