@@ -5,6 +5,9 @@ import glob
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
+script_path='./tools'
+ex_scripts = glob.glob(script_path+'/*.py') + glob.glob(script_path+'/*.sh')
+stretch_scripts=[f for f in ex_scripts if isfile(f)]
 
 setuptools.setup(
     name="hello_robot_stretch_urdf",
@@ -18,6 +21,7 @@ setuptools.setup(
     package_data={"stretch_urdf": ["RE2V0/meshes/*.STL","RE2V0/meshes/*.dae","RE2V0/*.urdf",
                                    "RE1V0/meshes/*.STL","RE1V0/meshes/*.dae","RE1V0/*.urdf",
                                    "SE3/meshes/*.STL","SE3/meshes/*.dae","SE3/*.urdf"]},
+    scripts=stretch_scripts,
     packages=['stretch_urdf'],
     classifiers=[
         "Programming Language :: Python :: 3",
