@@ -23,7 +23,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="./meshes/link_gripper_s3_body.STL" />
+          filename="./meshes/link_SG3_gripper_body.STL" />
       </geometry>
       <material
         name="">
@@ -37,7 +37,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="./meshes/link_gripper_s3_body_collision.STL" />
+          filename="./meshes/link_SG3_gripper_body_collision.STL" />
       </geometry>
     </collision>
   </link>
@@ -76,7 +76,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="./meshes/link_gripper_finger_right.STL" />
+          filename="./meshes/link_SG3_gripper_finger_right.STL" />
       </geometry>
       <material
         name="">
@@ -90,7 +90,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="./meshes/link_gripper_finger_right_collision.STL" />
+          filename="./meshes/link_SG3_gripper_finger_right_collision.STL" />
       </geometry>
     </collision>
   </link>
@@ -134,7 +134,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="./meshes/link_gripper_fingertip_right.STL" />
+          filename="./meshes/link_SG3_gripper_fingertip_right.STL" />
       </geometry>
       <material
         name="">
@@ -148,7 +148,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="./meshes/link_gripper_fingertip_right_collision.STL" />
+          filename="./meshes/link_SG3_gripper_fingertip_right_collision.STL" />
       </geometry>
     </collision>
   </link>
@@ -187,7 +187,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="./meshes/link_aruco_fingertip_right.STL" />
+          filename="./meshes/link_SG3_aruco_fingertip_right.STL" />
       </geometry>
       <material
         name="">
@@ -201,7 +201,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="./meshes/link_aruco_fingertip_right.STL" />
+          filename="./meshes/link_SG3_aruco_fingertip_right.STL" />
       </geometry>
     </collision>
   </link>
@@ -240,7 +240,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="./meshes/link_gripper_finger_left.STL" />
+          filename="./meshes/link_SG3_gripper_finger_left.STL" />
       </geometry>
       <material
         name="">
@@ -254,7 +254,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="./meshes/link_gripper_finger_left_collision.STL" />
+          filename="./meshes/link_SG3_gripper_finger_left_collision.STL" />
       </geometry>
     </collision>
   </link>
@@ -298,7 +298,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="./meshes/link_gripper_fingertip_left.STL" />
+          filename="./meshes/link_SG3_gripper_fingertip_left.STL" />
       </geometry>
       <material
         name="">
@@ -312,7 +312,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="./meshes/link_gripper_fingertip_left_collision.STL" />
+          filename="./meshes/link_SG3_gripper_fingertip_left_collision.STL" />
       </geometry>
     </collision>
   </link>
@@ -351,7 +351,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="./meshes/link_aruco_fingertip_left.STL" />
+          filename="./meshes/link_SG3_aruco_fingertip_left.STL" />
       </geometry>
       <material
         name="">
@@ -365,7 +365,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="./meshes/link_aruco_fingertip_left.STL" />
+          filename="./meshes/link_SG3_aruco_fingertip_left.STL" />
       </geometry>
     </collision>
   </link>
@@ -404,7 +404,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="./meshes/link_aruco_d405.STL" />
+          filename="./meshes/link_SG3_aruco_d405.STL" />
       </geometry>
       <material
         name="">
@@ -418,7 +418,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="./meshes/link_aruco_d405.STL" />
+          filename="./meshes/link_SG3_aruco_d405.STL" />
       </geometry>
     </collision>
   </link>

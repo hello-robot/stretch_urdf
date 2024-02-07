@@ -23,7 +23,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="./meshes/link_wrist_yaw_bottom.STL" />
+          filename="./meshes/link_DW3_wrist_yaw_bottom.STL" />
       </geometry>
       <material
         name="">
@@ -37,7 +37,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="./meshes/link_wrist_yaw_bottom_collision.STL" />
+          filename="./meshes/link_DW3_wrist_yaw_bottom_collision.STL" />
       </geometry>
     </collision>
   </link>
@@ -76,7 +76,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="./meshes/link_wrist_pitch.STL" />
+          filename="./meshes/link_DW3_wrist_pitch.STL" />
       </geometry>
       <material
         name="">
@@ -90,7 +90,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="./meshes/link_wrist_pitch_collision.STL" />
+          filename="./meshes/link_DW3_wrist_pitch_collision.STL" />
       </geometry>
     </collision>
   </link>
@@ -130,7 +130,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="./meshes/link_wrist_roll.STL" />
+          filename="./meshes/link_DW3_wrist_roll.STL" />
       </geometry>
       <material
         name="">
@@ -144,7 +144,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="./meshes/link_wrist_roll_collision.STL" />
+          filename="./meshes/link_DW3_wrist_roll_collision.STL" />
       </geometry>
     </collision>
   </link>

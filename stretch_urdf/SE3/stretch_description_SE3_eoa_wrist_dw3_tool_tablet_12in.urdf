@@ -829,7 +829,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="./meshes/link_wrist_yaw_bottom.STL"/>
+        <mesh filename="./meshes/link_DW3_wrist_yaw_bottom.STL"/>
       </geometry>
       <material name="">
         <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1"/>
@@ -838,7 +838,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="./meshes/link_wrist_yaw_bottom_collision.STL"/>
+        <mesh filename="./meshes/link_DW3_wrist_yaw_bottom_collision.STL"/>
       </geometry>
     </collision>
   </link>
@@ -857,7 +857,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="./meshes/link_wrist_pitch.STL"/>
+        <mesh filename="./meshes/link_DW3_wrist_pitch.STL"/>
       </geometry>
       <material name="">
         <color rgba="1 1 1 1"/>
@@ -866,7 +866,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="./meshes/link_wrist_pitch_collision.STL"/>
+        <mesh filename="./meshes/link_DW3_wrist_pitch_collision.STL"/>
       </geometry>
     </collision>
   </link>
@@ -886,7 +886,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="./meshes/link_wrist_roll.STL"/>
+        <mesh filename="./meshes/link_DW3_wrist_roll.STL"/>
       </geometry>
       <material name="">
         <color rgba="0.898039215686275 0.917647058823529 0.929411764705882 1"/>
@@ -895,7 +895,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="./meshes/link_wrist_roll_collision.STL"/>
+        <mesh filename="./meshes/link_DW3_wrist_roll_collision.STL"/>
       </geometry>
     </collision>
   </link>
@@ -951,7 +951,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="./meshes/link_head_nav_cam.STL"/>
+        <mesh filename="./meshes/link_SE3_head_nav_cam.STL"/>
       </geometry>
       <material name="">
         <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1"/>
@@ -960,7 +960,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="./meshes/link_head_nav_cam_collision.STL"/>
+        <mesh filename="./meshes/link_SE3_head_nav_cam_collision.STL"/>
       </geometry>
     </collision>
   </link>

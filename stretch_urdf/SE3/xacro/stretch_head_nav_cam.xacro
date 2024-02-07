@@ -23,7 +23,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="./meshes/link_head_nav_cam.STL" />
+          filename="./meshes/link_SE3_head_nav_cam.STL" />
       </geometry>
       <material
         name="">
@@ -37,7 +37,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="./meshes/link_head_nav_cam_collision.STL" />
+          filename="./meshes/link_SE3_head_nav_cam_collision.STL" />
       </geometry>
     </collision>
   </link>
