@@ -166,6 +166,7 @@ if __name__ == "__main__":
     parser.add_argument('--model', type=str,choices=['RE1V0','RE2V0','SE3'], help='Choose a Robot model name.')
     parser.add_argument('--tool', type=str, help='Choose a supported Robot tool name.')
     parser.add_argument("--ros2_rebuild", help="Rebuild ROS2 Stretch Description package", action="store_true")
+    parser.add_argument('-y','--yes',help="Does not ask for confirmation prompt.", action="store_true")
     args = parser.parse_args()
     
     verify_ros()
@@ -186,14 +187,20 @@ if __name__ == "__main__":
         tool_name = args.tool
         if verify_robot_tool_name():
             print_info()
-            x = input("Proceed with URDF Update?(y/n)")
+            if args.yes:
+                x = 'y'
+            else:
+                x = input("Proceed with URDF Update (y/n)?")
             if x=='y' or x=='Y':
                 copy_mesh_files(args.verbose)
                 copy_xacro_files(args.verbose)
     else:
         if verify_robot_tool_name():
             print_info()
-            x = input("Proceed with URDF Update?(y/n)")
+            if args.yes:
+                x = 'y'
+            else:
+                x = input("Proceed with URDF Update (y/n)?")
             if x=='y' or x=='Y':
                 copy_mesh_files(args.verbose)
                 copy_xacro_files(args.verbose)
