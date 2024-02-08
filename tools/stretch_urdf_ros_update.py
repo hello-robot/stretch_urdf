@@ -12,14 +12,9 @@ print("For use with S T R E T C H (R) from Hello Robot Inc.")
 print("---------------------------------------------------------------------\n")
 
 ############## Initialize Variables #####################
-try:
-    import stretch_body.robot_params
-    tool_name = stretch_body.robot_params.RobotParams().get_params()[1]['robot']['tool']
-    model_name = stretch_body.robot_params.RobotParams().get_params()[1]['robot']['model_name']
-except ModuleNotFoundError:
-    tool_name = None
-    model_name = None
 
+tool_name = None
+model_name = None
 root_dir = None
 ros_repo_path = None
 ros_version = None
@@ -27,6 +22,16 @@ data_dir = None
 
 
 ############### Helper Methods ########################
+
+def get_robot_params():
+    global tool_name, model_name
+    try:
+        import stretch_body.robot_params
+        tool_name = stretch_body.robot_params.RobotParams().get_params()[1]['robot']['tool']
+        model_name = stretch_body.robot_params.RobotParams().get_params()[1]['robot']['model_name']
+    except ModuleNotFoundError:
+        print("Unable to find stretch tool params. Use --model and --tool to manually configure.")
+
 def run_cmd(cmdstr,verbose=False):
     if verbose:
         print(cmdstr)
@@ -161,27 +166,30 @@ def copy_xacro_files(v=False):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='Tool to update Stretch Description URDF/Mesh files.')
+    parser = argparse.ArgumentParser(description='Tool to update the ROS Stretch Description package Xacros and Mesh files based on the configured End-of-Arm tool.')
     parser.add_argument("-v","--verbose", help="Prints more info", action="store_true")
     parser.add_argument('--model', type=str,choices=['RE1V0','RE2V0','SE3'], help='Choose a Robot model name.')
     parser.add_argument('--tool', type=str, help='Choose a supported Robot tool name.')
-    parser.add_argument("--ros2_rebuild", help="Rebuild ROS2 Stretch Description package", action="store_true")
-    parser.add_argument('-y','--yes',help="Does not ask for confirmation prompt.", action="store_true")
+    parser.add_argument("--ros2_rebuild", help="Rebuild ROS2's Stretch Description package", action="store_true")
+    parser.add_argument('-y','--yes',help="Override Confirmation prompt.", action="store_true")
     args = parser.parse_args()
-    
+
+    get_robot_params()
     verify_ros()
     
     if len([x for x in (args.model,args.tool) if x is not None]) == 1:
         parser.error('--model and --tool must be given together')
 
     if args.ros2_rebuild:
-        print("Updating Uncalibrated URDF...\n")
-        os.system('ros2 run stretch_calibration update_uncalibrated_urdf')
-        print("\nUpdating URDF after xacro change...\n")
-        os.system('ros2 run stretch_calibration update_urdf_after_xacro_change')
-        print("\nRebuild stretch_description package...\n")
-        os.system('cd ~/ament_ws;colcon build --packages-select stretch_description')
-
+        if ros_version==2:
+            print("Updating Uncalibrated URDF...\n")
+            os.system('ros2 run stretch_calibration update_uncalibrated_urdf')
+            print("\nUpdating URDF after xacro change...\n")
+            os.system('ros2 run stretch_calibration update_urdf_after_xacro_change')
+            print("\nRebuild stretch_description package...\n")
+            os.system('cd ~/ament_ws;colcon build --packages-select stretch_description')
+        else:
+            print("Unable to find a ROS2 install.")
     elif args.model and args.tool:
         model_name = args.model
         tool_name = args.tool
@@ -194,6 +202,8 @@ if __name__ == "__main__":
             if x=='y' or x=='Y':
                 copy_mesh_files(args.verbose)
                 copy_xacro_files(args.verbose)
+                if ros_version==2:
+                    print("Note: Rebuild Stretch Description package to apply the changes with command `stretch_urdf_ros_update.py --ros2_rebuild`.")
     else:
         if verify_robot_tool_name():
             print_info()
@@ -204,5 +214,7 @@ if __name__ == "__main__":
             if x=='y' or x=='Y':
                 copy_mesh_files(args.verbose)
                 copy_xacro_files(args.verbose)
+                if ros_version==2:
+                    print("Note: Rebuild Stretch Description package to apply the changes with command `stretch_urdf_ros_update.py --ros2_rebuild`.")
 
         
