@@ -10,8 +10,8 @@ ex_scripts = glob.glob(script_path+'/*.py') + glob.glob(script_path+'/*.sh')
 stretch_scripts=[f for f in ex_scripts if isfile(f)]
 
 setuptools.setup(
-    name="hello_robot_stretch_urdf",
-    version="0.0.20",
+    name="hello-robot-stretch-urdf",
+    version="0.0.21",
     author="Hello Robot Inc.",
     author_email="support@hello-robot.com",
     description="Stretch URDF",
