@@ -46,7 +46,7 @@
     type="fixed">
     <origin
       xyz="0 0 0"
-      rpy="-3.14159265358979 0 -1.5707963267949" />
+      rpy="-3.14159265358979 0 1.5707963267949" />
     <parent
       link="link_wrist_yaw" />
     <child
