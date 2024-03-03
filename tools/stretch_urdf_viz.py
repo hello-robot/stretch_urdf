@@ -8,7 +8,6 @@ import pyrender
 import warnings
 import glob
 
-from hello_helpers.gripper_conversion import GripperConversion
 import stretch_body.robot
 import stretch_body.device
 import stretch_body.hello_utils as hu
@@ -204,6 +203,7 @@ if __name__ == "__main__":
 
     if args.gamepad:
         import stretch_body.gamepad_teleop
+        from hello_helpers.gripper_conversion import GripperConversion
 
         r = stretch_body.robot.Robot()
         r.startup()

@@ -187,7 +187,7 @@ if __name__ == "__main__":
             print("\nUpdating URDF after xacro change...\n")
             os.system('ros2 run stretch_calibration update_urdf_after_xacro_change')
             print("\nRebuild stretch_description package...\n")
-            os.system('cd ~/ament_ws;colcon build --packages-select stretch_description')
+            os.system('cd ~/ament_ws;colcon build --packages-select stretch_description stretch_core')
         else:
             print("Unable to find a ROS2 install.")
     elif args.model and args.tool:
