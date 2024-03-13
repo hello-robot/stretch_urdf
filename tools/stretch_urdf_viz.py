@@ -84,7 +84,13 @@ class StretchState:
         self.stretch = robot
         self.use_gripper=use_gripper
         self.use_dw=use_dw
-        self.gripper_conversion = GripperConversion()
+        if self.use_gripper:
+            # Verify gripper is present
+            for j in self.stretch.end_of_arm.joints:
+                if 'gripper' in j:
+                    self.use_gripper = True
+                else:
+                    self.use_gripper = False
 
     def get_urdf_configuration(self):
 
@@ -125,9 +131,9 @@ class StretchState:
             except KeyError:
                 print('Tool must include Stretch Gripper. Exiting...')
                 exit(1)
-            _, gripper_finger_rad, _, _ = self.gripper_conversion.status_to_all(gripper_status)
-            configuration['joint_gripper_finger_left']= gripper_finger_rad
-            configuration['joint_gripper_finger_right']=gripper_finger_rad
+            gripper_status = self.gripper_conversion.get_status(gripper_status)
+            configuration['joint_gripper_finger_left']= gripper_status['gripper_conversion']['finger_rad']
+            configuration['joint_gripper_finger_right']=gripper_status['gripper_conversion']['finger_effort']
         if self.use_dw:
             configuration['joint_wrist_pitch'] = stretch_status['end_of_arm']['wrist_pitch']['pos']
             configuration['joint_wrist_roll'] = stretch_status['end_of_arm']['wrist_roll']['pos']
@@ -172,7 +178,7 @@ if __name__ == "__main__":
     tool_name=urdf_name[urdf_name.rfind(model_name)+len(model_name)+1:-5]
     print('Using tool: %s'%tool_name)
     use_gripper=(tool_name=='tool_stretch_gripper' or tool_name=='tool_dex_wrist' or tool_name=='eoa_wrist_dw3_tool_sg3')
-    use_dw = (tool_name=='tool_dex_wrist' or tool_name=='eoa_wrist_dw3_tool_sg3' or tool_name=='eoa_wrist_dw3_tool_nil')
+    use_dw = (tool_name=='tool_dex_wrist' or tool_name=='eoa_wrist_dw3_tool_sg3' or tool_name=='eoa_wrist_dw3_tool_nil' or tool_name=='eoa_wrist_dw3_tool_tablet_12in')
 
     urdf = urdf_loader.URDF.load(urdf_name)
     tool = stretch_body.device.Device(req_params=False).robot_params['robot']['tool']
@@ -203,7 +209,6 @@ if __name__ == "__main__":
 
     if args.gamepad:
         import stretch_body.gamepad_teleop
-        from hello_helpers.gripper_conversion import GripperConversion
 
         r = stretch_body.robot.Robot()
         r.startup()
