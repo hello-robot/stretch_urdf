@@ -58,7 +58,7 @@ class URDFVisualizer:
         else:
             fk = self.urdf.visual_trimesh_fk(cfg=cfg)
 
-        self.scene = pyrender.Scene()
+        self.scene = pyrender.Scene(ambient_light = [0,0,0, 0.5])
         self.nodes = []
         for tm in fk:
             pose = fk[tm]
@@ -127,9 +127,8 @@ class StretchState:
             except KeyError:
                 print('Tool must include Stretch Gripper. Exiting...')
                 exit(1)
-            gripper_status = self.gripper_conversion.get_status(gripper_status)
-            configuration['joint_gripper_finger_left']= gripper_status['gripper_conversion']['finger_rad']
-            configuration['joint_gripper_finger_right']=gripper_status['gripper_conversion']['finger_effort']
+            configuration['joint_gripper_finger_left'] = gripper_status['gripper_conversion']['finger_rad']/2
+            configuration['joint_gripper_finger_right'] = gripper_status['gripper_conversion']['finger_rad']/2
         if self.use_dw:
             configuration['joint_wrist_pitch'] = stretch_status['end_of_arm']['wrist_pitch']['pos']
             configuration['joint_wrist_roll'] = stretch_status['end_of_arm']['wrist_roll']['pos']
