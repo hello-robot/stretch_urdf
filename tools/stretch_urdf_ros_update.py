@@ -7,6 +7,7 @@ import shlex
 import re
 import argparse
 import click
+import pathlib
 
 print("For use with S T R E T C H (R) from Hello Robot Inc.")
 print("---------------------------------------------------------------------\n")
@@ -59,14 +60,32 @@ def verify_ros():
         sys.exit()
 
     if ros_version==2:
-        ros_repo_path = '/home/hello-robot/ament_ws/src/stretch_ros2'
+        from ament_index_python.packages import get_package_prefix, PackageNotFoundError
+        try:
+            p = get_package_prefix('stretch_description')
+            ros_repo_path = str(pathlib.Path(p).parent.parent / 'src' / 'stretch_ros2').replace(str(pathlib.Path(p).home()), '~')
+            ros_repo_path = os.path.expanduser(ros_repo_path)
+        except PackageNotFoundError:
+            print("Unable to find stretch_descrition package.")
+            sys.exit(1)
         if not os.path.exists(ros_repo_path):
-            print("Unable to find stretch_ros2 packages folder in '~/ament_ws/src/'.")
+            print(f"Unable to find path {ros_repo_path}.")
             sys.exit(1)
     else:
-        ros_repo_path = '/home/hello-robot/catkin_ws/src/stretch_ros'
+        import rospkg
+        rospack = rospkg.RosPack()
+        p = rospack.get_path('stretch_description')
+        ws_paths = [str(par.parent) for par in pathlib.Path(p).parents if str(par).endswith('src')]
+        ros_repo_path = ''
+        if len(ws_paths) > 0:
+            ros_repo_path = ws_paths[0].replace(str(pathlib.Path(p).home()), '~')
+            ros_repo_path = str(pathlib.Path(ros_repo_path) / 'src' / 'stretch_ros')
+            ros_repo_path = os.path.expanduser(ros_repo_path)
+        else:
+            print("Unable to find stretch_descrition package.")
+            sys.exit(1)
         if not os.path.exists(ros_repo_path):
-            print("Unable to find stretch_ros packages folder in '~/catkin_ws/src/'.")
+            print(f"Unable to find path {ros_repo_path}.")
             sys.exit(1)
 
 def get_ros_version():
@@ -92,7 +111,7 @@ def print_info():
     print(f"Robot Tool Name = {tool_name}")
     print(f"Found Stretch URDF files at = {data_dir}")
     print(f"Found ROS_DISTRO = {os.environ['ROS_DISTRO']}")
-    print(f"ROS Package Path = {ros_repo_path}/stretch_description")
+    print(f"Stretch Description Package Path = {ros_repo_path}/stretch_description")
     print("\n")
 
 def search_and_replace(file_path, search_word, replace_word):
