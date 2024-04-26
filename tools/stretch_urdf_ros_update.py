@@ -66,7 +66,7 @@ def verify_ros():
             ros_repo_path = str(pathlib.Path(p).parent.parent / 'src' / 'stretch_ros2').replace(str(pathlib.Path(p).home()), '~')
             ros_repo_path = os.path.expanduser(ros_repo_path)
         except PackageNotFoundError:
-            print("Unable to find stretch_descrition package.")
+            print("Unable to find stretch_description package.")
             sys.exit(1)
         if not os.path.exists(ros_repo_path):
             print(f"Unable to find path {ros_repo_path}.")
@@ -82,7 +82,7 @@ def verify_ros():
             ros_repo_path = str(pathlib.Path(ros_repo_path) / 'src' / 'stretch_ros')
             ros_repo_path = os.path.expanduser(ros_repo_path)
         else:
-            print("Unable to find stretch_descrition package.")
+            print("Unable to find stretch_description package.")
             sys.exit(1)
         if not os.path.exists(ros_repo_path):
             print(f"Unable to find path {ros_repo_path}.")
