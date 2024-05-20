@@ -11,6 +11,9 @@ import glob
 import stretch_body.robot
 import stretch_body.device
 import stretch_body.hello_utils as hu
+import time
+import multiprocessing
+
 try:
     # works on ubunut 22.04
     import importlib.resources as importlib_resources
@@ -55,7 +58,7 @@ class URDFVisualizer:
         else:
             fk = self.urdf.visual_trimesh_fk(cfg=cfg)
 
-        self.scene = pyrender.Scene()
+        self.scene = pyrender.Scene(ambient_light = [0,0,0, 0.5])
         self.nodes = []
         for tm in fk:
             pose = fk[tm]
@@ -84,7 +87,6 @@ class StretchState:
         self.stretch = robot
         self.use_gripper=use_gripper
         self.use_dw=use_dw
-        self.gripper_conversion = GripperConversion()
 
     def get_urdf_configuration(self):
 
@@ -125,9 +127,8 @@ class StretchState:
             except KeyError:
                 print('Tool must include Stretch Gripper. Exiting...')
                 exit(1)
-            _, gripper_finger_rad, _, _ = self.gripper_conversion.status_to_all(gripper_status)
-            configuration['joint_gripper_finger_left']= gripper_finger_rad
-            configuration['joint_gripper_finger_right']=gripper_finger_rad
+            configuration['joint_gripper_finger_left'] = gripper_status['gripper_conversion']['finger_rad']/2
+            configuration['joint_gripper_finger_right'] = gripper_status['gripper_conversion']['finger_rad']/2
         if self.use_dw:
             configuration['joint_wrist_pitch'] = stretch_status['end_of_arm']['wrist_pitch']['pos']
             configuration['joint_wrist_roll'] = stretch_status['end_of_arm']['wrist_roll']['pos']
@@ -172,7 +173,7 @@ if __name__ == "__main__":
     tool_name=urdf_name[urdf_name.rfind(model_name)+len(model_name)+1:-5]
     print('Using tool: %s'%tool_name)
     use_gripper=(tool_name=='tool_stretch_gripper' or tool_name=='tool_dex_wrist' or tool_name=='eoa_wrist_dw3_tool_sg3')
-    use_dw = (tool_name=='tool_dex_wrist' or tool_name=='eoa_wrist_dw3_tool_sg3' or tool_name=='eoa_wrist_dw3_tool_nil')
+    use_dw = (tool_name=='tool_dex_wrist' or tool_name=='eoa_wrist_dw3_tool_sg3' or tool_name=='eoa_wrist_dw3_tool_nil' or tool_name=='eoa_wrist_dw3_tool_tablet_12in')
 
     urdf = urdf_loader.URDF.load(urdf_name)
     tool = stretch_body.device.Device(req_params=False).robot_params['robot']['tool']
@@ -203,7 +204,7 @@ if __name__ == "__main__":
 
     if args.gamepad:
         import stretch_body.gamepad_teleop
-        from hello_helpers.gripper_conversion import GripperConversion
+        viz_process_manager = multiprocessing.Manager()
 
         r = stretch_body.robot.Robot()
         r.startup()
@@ -214,15 +215,39 @@ if __name__ == "__main__":
         gamepad = stretch_body.gamepad_teleop.GamePadTeleop(robot_instance = False)
         gamepad.startup(robot=r)
 
-        stretch_state = StretchState(r, use_gripper,use_dw)
-        viz.show(cfg=stretch_state.get_urdf_configuration(), use_collision=args.collision)
-        while viz.viewer.is_active:
-            viz.update_pose(cfg=stretch_state.get_urdf_configuration(), use_collision=args.collision)
-            gamepad.step_mainloop(r)
+        def _worker(viz_shared_cfg, viz_shared_collision):
+            urdf = urdf_loader.URDF.load(urdf_name)
+            tool = stretch_body.device.Device(req_params=False).robot_params['robot']['tool']
+            viz = URDFVisualizer(urdf)
+            collision = False
+            if viz_shared_collision.get():
+                collision = True
+            # wait till the first joint config is updated from the main process
+            time.sleep(1)
+            viz.show(cfg=dict(viz_shared_cfg), use_collision=collision)
+            while viz.viewer.is_active:
+                viz.update_pose(cfg=dict(viz_shared_cfg), use_collision=collision)
 
-        gamepad.gamepad_controller.stop()
-        r.stop()
-        exit()
+        stretch_state = StretchState(r, use_gripper,use_dw)
+        viz_shared_cfg = viz_process_manager.dict()
+        viz_shared_collision = viz_process_manager.Value(typecode=bool,value=args.collision)
+
+
+        viz_proccess = multiprocessing.Process(target=_worker,args=(viz_shared_cfg,viz_shared_collision,),daemon=True)
+        viz_proccess.start()
+
+        while True:
+            try:
+                cfg = stretch_state.get_urdf_configuration()
+                for k in cfg.keys():
+                    viz_shared_cfg[k] = cfg[k]
+                gamepad.step_mainloop(r)
+            except hu.ThreadServiceExit:
+                print("Exiting...")
+                viz_proccess.join()
+                gamepad.gamepad_controller.stop()
+                r.stop()
+                exit()
 
     cfg_pose = {
         'joint_left_wheel': 0.0,
