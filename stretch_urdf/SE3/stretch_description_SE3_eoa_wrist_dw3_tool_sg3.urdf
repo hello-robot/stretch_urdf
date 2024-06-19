@@ -744,8 +744,8 @@
   </material>
   <!-- camera body, with origin at bottom screw mount -->
   <joint name="camera_d405_joint" type="fixed">
-    <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
-    <parent link="link_aruco_d405"/>
+    <origin rpy="0 -1.3963 -1.5708" xyz="0 0.044142 0.042067"/>
+    <parent link="link_gripper_s3_body"/>
     <child link="camera_d405_bottom_screw_frame"/>
   </joint>
   <link name="camera_d405_bottom_screw_frame"/>
