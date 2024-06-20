@@ -11,7 +11,7 @@ stretch_scripts=[f for f in ex_scripts if isfile(f)]
 
 setuptools.setup(
     name="hello-robot-stretch-urdf",
-    version="0.0.24",
+    version="0.0.25",
     author="Hello Robot Inc.",
     author_email="support@hello-robot.com",
     description="Stretch URDF",
