@@ -11,7 +11,7 @@ aluminum peripherial evaluation case.
   <xacro:include filename="_d435.urdf.xacro"/>
   <xacro:include filename="_d435i_imu_modules.urdf.xacro"/>
 
-  <xacro:macro name="sensor_d435i" params="parent *origin name:=camera_d435i use_nominal_extrinsics:=false">
+  <xacro:macro name="sensor_d435i" params="parent *origin name:=camera use_nominal_extrinsics:=false">
     <xacro:sensor_d435 parent="${parent}" name="${name}" use_nominal_extrinsics="${use_nominal_extrinsics}">
       <xacro:insert_block name="origin" />
     </xacro:sensor_d435>
