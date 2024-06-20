@@ -25,9 +25,6 @@ aluminum peripherial evaluation case.
   <!-- Includes -->
   <xacro:include filename="_materials_d405.urdf.xacro" />
   <xacro:include filename="_usb_plug_d405.urdf.xacro" />
-  <material name="aluminum_d405">
-    <color rgba="0.5 0.5 0.5 1"/>
-  </material>
 
   <xacro:macro name="sensor_d405" params="parent *origin name:=gripper_camera use_nominal_extrinsics:=false">
     <xacro:arg name="add_plug" default="false" />
