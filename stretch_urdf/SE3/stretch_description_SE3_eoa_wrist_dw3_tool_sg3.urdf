@@ -736,9 +736,12 @@
     <parent link="camera_gyro_frame"/>
     <child link="camera_gyro_optical_frame"/>
   </joint>
-  <!-- Includes -->
-  <!-- <xacro:include filename="_materials.urdf.xacro" />
-  <xacro:include filename="_usb_plug.urdf.xacro" /> -->
+  <material name="aluminum_d405">
+    <color rgba="0.5 0.5 0.5 1"/>
+  </material>
+  <material name="plastic_d405">
+    <color rgba="0.1 0.1 0.1 1"/>
+  </material>
   <material name="aluminum_d405">
     <color rgba="0.5 0.5 0.5 1"/>
   </material>
