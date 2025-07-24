@@ -98,7 +98,13 @@ def get_ros_version():
             data_dir = f"{root_dir}/{model_name}"
             return 1
         if os.environ['ROS_DISTRO'] == 'humble':
-            # works on ubunut 22.04
+            # works on ubuntu 22.04
+            import importlib.resources as importlib_resources
+            root_dir = importlib_resources.files("stretch_urdf")
+            data_dir = f"{root_dir}/{model_name}"
+            return 2
+        if os.environ['ROS_DISTRO'] == 'jazzy':
+            # works on ubuntu 24.04
             import importlib.resources as importlib_resources
             root_dir = importlib_resources.files("stretch_urdf")
             data_dir = f"{root_dir}/{model_name}"
