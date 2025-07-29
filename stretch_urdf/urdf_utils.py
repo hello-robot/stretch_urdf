@@ -64,7 +64,7 @@ def clip_joint_limits(robot, use_original_limits=True):
         ik_joint_limits = {
             "joint_mobile_base_translation": (-0.25, 0.25),
             "joint_mobile_base_rotation": (-(np.pi / 2.0), np.pi / 2.0),
-            "joint_lift": (0.01, 1.09),
+            "joint_lift": (0.01, 1.1),
             "joint_arm_l0": (0.01, 0.48),
             "joint_wrist_yaw": (-(np.pi / 4.0), np.pi),
             "joint_wrist_pitch": (-0.9 * (np.pi / 2.0), np.pi / 20.0),
@@ -161,7 +161,7 @@ def merge_arm(robot):
         joint.type = "fixed"
 
 
-def add_virtual_rotary_joint(robot):
+def add_virtual_base_joints(robot, base_rotation):
     """
     Add virtual rotary joint for mobile base.
 
@@ -175,11 +175,27 @@ def add_virtual_rotary_joint(robot):
     urdf_parser_py.urdf.Robot
         modified URDF with mobile base rotation joint
     """
-    link_virtual_base_rotary = ud.Link(
+    link_virtual_base = ud.Link(
         name="virtual_base", visual=None, inertial=None, collision=None, origin=None
     )
+
     origin_rotary = ud.Pose(xyz=[0, 0, 0], rpy=[0, 0, 0])
     limit_rotary = ud.JointLimit(effort=10, velocity=1, lower=-np.pi, upper=np.pi)
+    limit_prismatic = ud.JointLimit(effort=10, velocity=1, lower=-0.5, upper=0.5)
+
+    joint_mobile_base_translation = ud.Joint(
+        name="joint_mobile_base_translation",
+        parent="virtual_base",
+        child="base_link",
+        joint_type="prismatic",
+        axis=[1, 0, 0],
+        origin=origin_rotary,
+        limit=limit_prismatic,
+        dynamics=None,
+        safety_controller=None,
+        calibration=None,
+        mimic=None,
+    )
     joint_mobile_base_rotation = ud.Joint(
         name="joint_mobile_base_rotation",
         parent="virtual_base",
@@ -193,9 +209,11 @@ def add_virtual_rotary_joint(robot):
         calibration=None,
         mimic=None,
     )
-    robot.add_link(link_virtual_base_rotary)
-    robot.add_joint(joint_mobile_base_rotation)
-
+    robot.add_link(link_virtual_base)
+    if base_rotation:
+        robot.add_joint(joint_mobile_base_rotation)
+    else:
+        robot.add_joint(joint_mobile_base_translation)
 
 def generate_urdf_from_robot(robot, app_name, description=None):
     """
@@ -237,7 +255,7 @@ def generate_urdf_from_robot(robot, app_name, description=None):
     return filename
 
 
-def generate_ik_urdfs(app_name, rigid_wrist_urdf=True):
+def generate_ik_urdfs(app_name, rigid_wrist_urdf=True, base_rotation=True):
     """
     Generates URDFs for IK packages. The latest calibrated
     URDF is used as a starting point, then these modifications
@@ -281,10 +299,11 @@ def generate_ik_urdfs(app_name, rigid_wrist_urdf=True):
 
     merge_arm(robot)
 
-    add_virtual_rotary_joint(robot)
+    add_virtual_base_joints(robot, base_rotation)
 
     ret = []
-    fpath = generate_urdf_from_robot(robot, app_name, 'base_rotation_ik')
+    description = 'base_rotation_ik' if base_rotation else 'base_translation_ik' 
+    fpath = generate_urdf_from_robot(robot, app_name, description)
     ret.append(fpath)
 
     if rigid_wrist_urdf:
