@@ -1,6 +1,9 @@
 # Overview
 
-The Stretch URDF package provides URDF and Mesh files for use by Stretch Body. 
+The Stretch URDF package provides URDF and Mesh files for use by Stretch Body.
+
+Looking for the Stretch 4 repository? Check out https://github.com/hello-robot/stretch4_urdf
+
 This URDF data is uncalibrated and is managed completely seperately from the Stretch ROS(2) URDF data. 
 
 This package can be installed by:
